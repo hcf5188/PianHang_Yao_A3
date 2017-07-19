@@ -157,7 +157,7 @@
 ;;;49     	// any CAN ID.  In order to receive any CAN ID, the ID and mask must both
 ;;;50     	// be set to 0, and the ID filter enabled.
 ;;;51     	can1RxMessage.ui32MsgID     = CAN1RXID;
-0000cc  f2401001          MOV      r0,#0x101
+0000cc  f44f7081          MOV      r0,#0x102
 0000d0  492c              LDR      r1,|L1.388|
 0000d2  6008              STR      r0,[r1,#0]  ; can1RxMessage
 ;;;52     	can1RxMessage.ui32MsgIDMask = 0xFFFFF;

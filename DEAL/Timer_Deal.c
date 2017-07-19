@@ -20,7 +20,7 @@ void Timer0AHandler(void)
 	{
 		M1_Pulse_Low; 
 		Motor_reversal1 = 0;
-//		Step_Num_Cur1.word ++; // 步数自增
+		Step_Num_Cur1.word ++; // 步数自增
 	}
 	
 }  
@@ -37,7 +37,7 @@ void Timer1AHandler(void)
 	{
 		M2_Pulse_Low; 
 		Motor_reversal2 = 0;
-//		Step_Num_Cur2.word ++; // 步数自增
+		Step_Num_Cur2.word ++; // 步数自增
 	}  
 }
 
@@ -136,34 +136,6 @@ void Timer2AHandler(void)
 		else
 		{LED_CONTROL = 1;LED_OFF;}	
 	}	
-	if((Timer2_cnt%20000)==19999)
-	{
-		
-		//start_cnt1++;
-		if(MOTOR_ISENABLE)
-		{
-			
-			//M1_Disable;
-			//M2_Disable;
-			//Motor_New_Cmd1   = 0;
-			//Motor_New_Cmd2   = 0;
-			//Timer1_Disble();      //关闭定时器0，停止脉冲反转
-		
-			MOTOR_ISENABLE = 0;
-		}
-		else
-		{
-//			M1_Enable;
-//			M2_Enable;
-//			Motor_New_Cmd1   = 1;
-//		//	Motor_New_Cmd2   = 0;
-//			TimerLoadSet(TIMER0_BASE, TIMER_A,ROM_SysCtlClockGet()/1000);
-//			TimerLoadSet(TIMER1_BASE, TIMER_A,ROM_SysCtlClockGet()/1000);
-//			//Timer1_Enable();      //关闭定时器0，停止脉冲反转
-//			
-			MOTOR_ISENABLE = 1;
-		}
-	}
 }   
 
 

@@ -4,16 +4,16 @@
 #include "system.h"
 #include "fifo.h"
 //级联限位
-#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
-#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
-#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
+//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
+//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
 
 //板载限位
-//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
-//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
-//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
+#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
+#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
 
 #define M1_Dir_Forward ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_PIN_4)
 #define M1_Dir_Reverse ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, 0)

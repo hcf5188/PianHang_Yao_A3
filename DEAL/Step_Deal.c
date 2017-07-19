@@ -38,9 +38,9 @@ void STEP_Start1(void)
 	Stop_index1 =3; //(Given_Fre1.word - FRE_MIN_LIMIT1)/STEP_INDEX_NUM1;
 	
 	if(Motor_Direction1 == 1)//方向
-		M1_Dir_Forward;				 
+		M1_Dir_Reverse;
 	else if(Motor_Direction1 == 0)//方向控制
-		M1_Dir_Reverse;			
+		M1_Dir_Forward;				
 }
 void STEP_Start2(void)
 {
@@ -65,9 +65,9 @@ void STEP_Start2(void)
 	Stop_index2 = 1;
 	
 	if(Motor_Direction2 == 1)//方向		
-		M2_Dir_Forward;
-	else if(Motor_Direction2 == 0)
 		M2_Dir_Reverse;
+	else if(Motor_Direction2 == 0)
+		M2_Dir_Forward;
 }
 /************************************************
 * 函 数 名 : void SOFT_Start_M1(void)
@@ -101,20 +101,12 @@ void SOFT_Start_M1(void)
 	if(Motor_Direction1 == 1)
 	{
 		if(M1_state.Limit1)
-		{
 			Motor1_Stop();
-			Motor_New_Cmd1   = 1;
-			Motor_Direction1 = 0;
-		}
 	}
 	else
 	{
 		if(M1_state.Limit2)
-		{
 			Motor1_Stop();
-			Motor_New_Cmd1   = 1;
-			Motor_Direction1 = 1;
-		}
 	}
 }
 void SOFT_Start_M2(void)
@@ -143,22 +135,12 @@ void SOFT_Start_M2(void)
 	if(Motor_Direction2 == 1) //判断电机运行方向
 	{
 		if(M2_state.Limit1)     //判断是否压到运行方向上的限位
-		{
 			Motor2_Stop();
-			
-			Motor_New_Cmd2   = 1;
-			Motor_Direction2 = 0;
-		}
 	}
 	else                      //判断电机运行方向
 	{
 		if(M2_state.Limit2)     //判断是否压到运行方向上的限位
-		{
 			Motor2_Stop();
-			
-			Motor_New_Cmd2   = 1;
-			Motor_Direction2 = 1;
-		}
 	}
 }
 static void Motor1_Stop(void )

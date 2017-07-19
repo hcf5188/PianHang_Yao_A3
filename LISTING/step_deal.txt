@@ -10,10 +10,10 @@
 000000  b510              PUSH     {r4,lr}
 ;;;18     {
 ;;;19     	Motor_New_Cmd1   = 0;
-000002  48f9              LDR      r0,|L1.1000|
+000002  48de              LDR      r0,|L1.892|
 000004  6800              LDR      r0,[r0,#0]  ; Flagbits
 000006  f4207080          BIC      r0,r0,#0x100
-00000a  49f7              LDR      r1,|L1.1000|
+00000a  49dc              LDR      r1,|L1.892|
 00000c  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;20     	
 ;;;21     	MotorTime_Pulse1 = 1;    //脉冲启动
@@ -50,173 +50,173 @@
 00004e  f0200004          BIC      r0,r0,#4
 000052  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;27     	M1_state.byte   &= 0x03; //初始清空其他状态
-000054  48e5              LDR      r0,|L1.1004|
+000054  48ca              LDR      r0,|L1.896|
 000056  7800              LDRB     r0,[r0,#0]  ; M1_state
 000058  f0000003          AND      r0,r0,#3
-00005c  49e3              LDR      r1,|L1.1004|
+00005c  49c8              LDR      r1,|L1.896|
 00005e  7008              STRB     r0,[r1,#0]
 ;;;28     	
 ;;;29     	
 ;;;30     	M_ss_cnt1          = 0; //Timer2频率反转计数初始化
 000060  2000              MOVS     r0,#0
-000062  49e3              LDR      r1,|L1.1008|
+000062  49c8              LDR      r1,|L1.900|
 000064  8008              STRH     r0,[r1,#0]
 ;;;31     	Step_Num_Cur1.word = 0; //当前已走步数
-000066  49e3              LDR      r1,|L1.1012|
+000066  49c8              LDR      r1,|L1.904|
 000068  8008              STRH     r0,[r1,#0]
 ;;;32     	motor_ss1          = SOFT_FRE_START_MIN1; //软启动 初始频率赋值
-00006a  f44f70c8          MOV      r0,#0x190
-00006e  49e2              LDR      r1,|L1.1016|
+00006a  f44f60fa          MOV      r0,#0x7d0
+00006e  49c7              LDR      r1,|L1.908|
 000070  8008              STRH     r0,[r1,#0]
 ;;;33     	//软启动频率变化幅值
 ;;;34     	Fre_Fuzhi11 = MOTOR_ONE_LIMIT11;//(Given_Fre1.word - SOFT_FRE_START_MIN1)/SOFT_FRE_START_NUM1; //都设置为固定值试试，效果应该非常好
-000072  2043              MOVS     r0,#0x43
-000074  49e1              LDR      r1,|L1.1020|
+000072  2064              MOVS     r0,#0x64
+000074  49c6              LDR      r1,|L1.912|
 000076  8008              STRH     r0,[r1,#0]
 ;;;35     	//软停止频率变化幅值
 ;;;36     	Fre_Fuzhi12 = MOTOR_ONE_LIMIT12;//(Given_Fre1.word - SOFT_FRE_STOP_MIN1)/SOFT_FRE_STOP_NUM1;//设置为固定值试一下
-000078  2004              MOVS     r0,#4
-00007a  49e1              LDR      r1,|L1.1024|
-00007c  8008              STRH     r0,[r1,#0]
+000078  f44f7096          MOV      r0,#0x12c
+00007c  49c5              LDR      r1,|L1.916|
+00007e  8008              STRH     r0,[r1,#0]
 ;;;37     	//软停止步数索引
 ;;;38     	Stop_index1 =3; //(Given_Fre1.word - FRE_MIN_LIMIT1)/STEP_INDEX_NUM1;
-00007e  2003              MOVS     r0,#3
-000080  49e0              LDR      r1,|L1.1028|
-000082  8008              STRH     r0,[r1,#0]
+000080  2003              MOVS     r0,#3
+000082  49c5              LDR      r1,|L1.920|
+000084  8008              STRH     r0,[r1,#0]
 ;;;39     	
 ;;;40     	if(Motor_Direction1 == 1)//方向
-000084  48d8              LDR      r0,|L1.1000|
-000086  7800              LDRB     r0,[r0,#0]  ; Flagbits
-000088  f3c01080          UBFX     r0,r0,#6,#1
-00008c  b140              CBZ      r0,|L1.160|
-;;;41     		M1_Dir_Forward;				 
-00008e  f04f7080          MOV      r0,#0x1000000
-000092  6a00              LDR      r0,[r0,#0x20]
-000094  2210              MOVS     r2,#0x10
-000096  4611              MOV      r1,r2
-000098  6803              LDR      r3,[r0,#0]
-00009a  48db              LDR      r0,|L1.1032|
-00009c  4798              BLX      r3
-00009e  e00c              B        |L1.186|
-                  |L1.160|
+000086  48bd              LDR      r0,|L1.892|
+000088  7800              LDRB     r0,[r0,#0]  ; Flagbits
+00008a  f3c01080          UBFX     r0,r0,#6,#1
+00008e  b140              CBZ      r0,|L1.162|
+;;;41     		M1_Dir_Reverse;
+000090  f04f7080          MOV      r0,#0x1000000
+000094  6a00              LDR      r0,[r0,#0x20]
+000096  2200              MOVS     r2,#0
+000098  2110              MOVS     r1,#0x10
+00009a  6803              LDR      r3,[r0,#0]
+00009c  48bf              LDR      r0,|L1.924|
+00009e  4798              BLX      r3
+0000a0  e00c              B        |L1.188|
+                  |L1.162|
 ;;;42     	else if(Motor_Direction1 == 0)//方向控制
-0000a0  48d1              LDR      r0,|L1.1000|
-0000a2  7800              LDRB     r0,[r0,#0]  ; Flagbits
-0000a4  f3c01080          UBFX     r0,r0,#6,#1
-0000a8  b938              CBNZ     r0,|L1.186|
-;;;43     		M1_Dir_Reverse;			
-0000aa  f04f7080          MOV      r0,#0x1000000
-0000ae  6a00              LDR      r0,[r0,#0x20]
-0000b0  2200              MOVS     r2,#0
-0000b2  2110              MOVS     r1,#0x10
-0000b4  6803              LDR      r3,[r0,#0]
-0000b6  48d4              LDR      r0,|L1.1032|
-0000b8  4798              BLX      r3
-                  |L1.186|
+0000a2  48b6              LDR      r0,|L1.892|
+0000a4  7800              LDRB     r0,[r0,#0]  ; Flagbits
+0000a6  f3c01080          UBFX     r0,r0,#6,#1
+0000aa  b938              CBNZ     r0,|L1.188|
+;;;43     		M1_Dir_Forward;				
+0000ac  f04f7080          MOV      r0,#0x1000000
+0000b0  6a00              LDR      r0,[r0,#0x20]
+0000b2  2210              MOVS     r2,#0x10
+0000b4  4611              MOV      r1,r2
+0000b6  6803              LDR      r3,[r0,#0]
+0000b8  48b8              LDR      r0,|L1.924|
+0000ba  4798              BLX      r3
+                  |L1.188|
 ;;;44     }
-0000ba  bd10              POP      {r4,pc}
+0000bc  bd10              POP      {r4,pc}
 ;;;45     void STEP_Start2(void)
                           ENDP
 
                   STEP_Start2 PROC
-0000bc  b510              PUSH     {r4,lr}
+0000be  b510              PUSH     {r4,lr}
 ;;;46     {
 ;;;47     	Motor_New_Cmd2   = 0;
-0000be  48ca              LDR      r0,|L1.1000|
-0000c0  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000c2  f4207000          BIC      r0,r0,#0x200
-0000c6  49c8              LDR      r1,|L1.1000|
-0000c8  6008              STR      r0,[r1,#0]  ; Flagbits
+0000c0  48ae              LDR      r0,|L1.892|
+0000c2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000c4  f4207000          BIC      r0,r0,#0x200
+0000c8  49ac              LDR      r1,|L1.892|
+0000ca  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;48     	
 ;;;49     	MotorTime_Pulse2 = 1;   //脉冲启动
-0000ca  4608              MOV      r0,r1
-0000cc  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000ce  f0200002          BIC      r0,r0,#2
-0000d2  1c80              ADDS     r0,r0,#2
-0000d4  6008              STR      r0,[r1,#0]  ; Flagbits
+0000cc  4608              MOV      r0,r1
+0000ce  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000d0  f0200002          BIC      r0,r0,#2
+0000d4  1c80              ADDS     r0,r0,#2
+0000d6  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;50     	Motor_Hold2      = 0;   //取消保持，一直使能驱动
-0000d6  4608              MOV      r0,r1
-0000d8  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000da  f0200020          BIC      r0,r0,#0x20
-0000de  6008              STR      r0,[r1,#0]  ; Flagbits
+0000d8  4608              MOV      r0,r1
+0000da  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000dc  f0200020          BIC      r0,r0,#0x20
+0000e0  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;51     	Timer_Send_Fre2  = 1;   //发送频率有效
-0000e0  4608              MOV      r0,r1
-0000e2  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000e4  f4203080          BIC      r0,r0,#0x10000
-0000e8  f5003080          ADD      r0,r0,#0x10000
-0000ec  6008              STR      r0,[r1,#0]  ; Flagbits
+0000e2  4608              MOV      r0,r1
+0000e4  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000e6  f4203080          BIC      r0,r0,#0x10000
+0000ea  f5003080          ADD      r0,r0,#0x10000
+0000ee  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;52     	M_SS_Fre_start2  = 1;   //软启动有效
-0000ee  4608              MOV      r0,r1
-0000f0  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000f2  f4203000          BIC      r0,r0,#0x20000
-0000f6  f5003000          ADD      r0,r0,#0x20000
-0000fa  6008              STR      r0,[r1,#0]  ; Flagbits
+0000f0  4608              MOV      r0,r1
+0000f2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000f4  f4203000          BIC      r0,r0,#0x20000
+0000f8  f5003000          ADD      r0,r0,#0x20000
+0000fc  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;53     	M_SS_Fre_stop2   = 0;   //软停止无效
-0000fc  4608              MOV      r0,r1
-0000fe  6800              LDR      r0,[r0,#0]  ; Flagbits
-000100  f4202080          BIC      r0,r0,#0x40000
-000104  6008              STR      r0,[r1,#0]  ; Flagbits
+0000fe  4608              MOV      r0,r1
+000100  6800              LDR      r0,[r0,#0]  ; Flagbits
+000102  f4202080          BIC      r0,r0,#0x40000
+000106  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;54     	Motor_reversal2  = 0;   //初始高脉冲
-000106  4608              MOV      r0,r1
-000108  6800              LDR      r0,[r0,#0]  ; Flagbits
-00010a  f0200008          BIC      r0,r0,#8
-00010e  6008              STR      r0,[r1,#0]  ; Flagbits
+000108  4608              MOV      r0,r1
+00010a  6800              LDR      r0,[r0,#0]  ; Flagbits
+00010c  f0200008          BIC      r0,r0,#8
+000110  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;55     	
 ;;;56     	M_ss_cnt2          = 0; //Timer2频率反转计数初始化
-000110  2000              MOVS     r0,#0
-000112  49be              LDR      r1,|L1.1036|
-000114  8008              STRH     r0,[r1,#0]
+000112  2000              MOVS     r0,#0
+000114  49a2              LDR      r1,|L1.928|
+000116  8008              STRH     r0,[r1,#0]
 ;;;57     	Step_Num_Cur2.word = 0; //当前已走步数
-000116  49be              LDR      r1,|L1.1040|
-000118  8008              STRH     r0,[r1,#0]
+000118  49a2              LDR      r1,|L1.932|
+00011a  8008              STRH     r0,[r1,#0]
 ;;;58     	motor_ss2          = SOFT_FRE_START_MIN2; //软启动 初始频率赋值
-00011a  f44f70c8          MOV      r0,#0x190
-00011e  49bd              LDR      r1,|L1.1044|
-000120  8008              STRH     r0,[r1,#0]
+00011c  f44f707a          MOV      r0,#0x3e8
+000120  49a1              LDR      r1,|L1.936|
+000122  8008              STRH     r0,[r1,#0]
 ;;;59     
 ;;;60     	//软启动频率变化幅值
 ;;;61     	Fre_Fuzhi21 = MOTOR_ONE_LIMIT21;//(Given_Fre2.word - SOFT_FRE_START_MIN2)/SOFT_FRE_START_NUM2; 
-000122  f44f70eb          MOV      r0,#0x1d6
-000126  49bc              LDR      r1,|L1.1048|
+000124  2028              MOVS     r0,#0x28
+000126  49a1              LDR      r1,|L1.940|
 000128  8008              STRH     r0,[r1,#0]
 ;;;62     	//软停止频率变化幅值
 ;;;63     	Fre_Fuzhi22 = MOTOR_ONE_LIMIT22;//(Given_Fre2.word - SOFT_FRE_STOP_MIN2)/SOFT_FRE_STOP_NUM2; 
-00012a  2014              MOVS     r0,#0x14
-00012c  49bb              LDR      r1,|L1.1052|
+00012a  201e              MOVS     r0,#0x1e
+00012c  49a0              LDR      r1,|L1.944|
 00012e  8008              STRH     r0,[r1,#0]
 ;;;64     	//软停止步数索引
 ;;;65     	Stop_index2 = 1;
 000130  2001              MOVS     r0,#1
-000132  49bb              LDR      r1,|L1.1056|
+000132  49a0              LDR      r1,|L1.948|
 000134  8008              STRH     r0,[r1,#0]
 ;;;66     	
 ;;;67     	if(Motor_Direction2 == 1)//方向		
-000136  48ac              LDR      r0,|L1.1000|
+000136  4891              LDR      r0,|L1.892|
 000138  7800              LDRB     r0,[r0,#0]  ; Flagbits
 00013a  f3c010c0          UBFX     r0,r0,#7,#1
 00013e  b140              CBZ      r0,|L1.338|
-;;;68     		M2_Dir_Forward;
+;;;68     		M2_Dir_Reverse;
 000140  f04f7080          MOV      r0,#0x1000000
 000144  6a00              LDR      r0,[r0,#0x20]
-000146  2200              MOVS     r2,#0
-000148  2104              MOVS     r1,#4
+000146  2204              MOVS     r2,#4
+000148  4611              MOV      r1,r2
 00014a  6803              LDR      r3,[r0,#0]
-00014c  48b5              LDR      r0,|L1.1060|
+00014c  489a              LDR      r0,|L1.952|
 00014e  4798              BLX      r3
 000150  e00c              B        |L1.364|
                   |L1.338|
 ;;;69     	else if(Motor_Direction2 == 0)
-000152  48a5              LDR      r0,|L1.1000|
+000152  488a              LDR      r0,|L1.892|
 000154  7800              LDRB     r0,[r0,#0]  ; Flagbits
 000156  f3c010c0          UBFX     r0,r0,#7,#1
 00015a  b938              CBNZ     r0,|L1.364|
-;;;70     		M2_Dir_Reverse;
+;;;70     		M2_Dir_Forward;
 00015c  f04f7080          MOV      r0,#0x1000000
 000160  6a00              LDR      r0,[r0,#0x20]
-000162  2204              MOVS     r2,#4
-000164  4611              MOV      r1,r2
+000162  2200              MOVS     r2,#0
+000164  2104              MOVS     r1,#4
 000166  6803              LDR      r3,[r0,#0]
-000168  48ae              LDR      r0,|L1.1060|
+000168  4893              LDR      r0,|L1.952|
 00016a  4798              BLX      r3
                   |L1.364|
 ;;;71     }
@@ -225,45 +225,45 @@
                           ENDP
 
                   Motor1_Stop PROC
-;;;163    }
-;;;164    static void Motor1_Stop(void )
+;;;145    }
+;;;146    static void Motor1_Stop(void )
 00016e  b510              PUSH     {r4,lr}
-;;;165    {
-;;;166    	TimerDisable(TIMER0_BASE, TIMER_A);  //关闭定时器0，停止脉冲反转
+;;;147    {
+;;;148    	TimerDisable(TIMER0_BASE, TIMER_A);  //关闭定时器0，停止脉冲反转
 000170  21ff              MOVS     r1,#0xff
-000172  48ad              LDR      r0,|L1.1064|
+000172  4892              LDR      r0,|L1.956|
 000174  f7fffffe          BL       TimerDisable
-;;;167    			
-;;;168    	MotorTime_Pulse1 = 0; //脉冲停止	
-000178  489b              LDR      r0,|L1.1000|
+;;;149    			
+;;;150    	MotorTime_Pulse1 = 0; //脉冲停止	
+000178  4880              LDR      r0,|L1.892|
 00017a  6800              LDR      r0,[r0,#0]  ; Flagbits
 00017c  f0200001          BIC      r0,r0,#1
-000180  4999              LDR      r1,|L1.1000|
+000180  497e              LDR      r1,|L1.892|
 000182  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;169    	Motor_Hold1      = 1; //电机处于停止保持状态
+;;;151    	Motor_Hold1      = 1; //电机处于停止保持状态
 000184  4608              MOV      r0,r1
 000186  6800              LDR      r0,[r0,#0]  ; Flagbits
 000188  f0200010          BIC      r0,r0,#0x10
 00018c  3010              ADDS     r0,r0,#0x10
 00018e  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;170    	Timer_Send_Fre1  = 0; //清空Timer2频率更改标志
+;;;152    	Timer_Send_Fre1  = 0; //清空Timer2频率更改标志
 000190  4608              MOV      r0,r1
 000192  6800              LDR      r0,[r0,#0]  ; Flagbits
 000194  f4205000          BIC      r0,r0,#0x2000
 000198  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;171    	M_SS_Fre_start1  = 0; //停止软启动
+;;;153    	M_SS_Fre_start1  = 0; //停止软启动
 00019a  4608              MOV      r0,r1
 00019c  6800              LDR      r0,[r0,#0]  ; Flagbits
 00019e  f4204080          BIC      r0,r0,#0x4000
 0001a2  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;172    	M_SS_Fre_stop1   = 0; //停止软停止	
+;;;154    	M_SS_Fre_stop1   = 0; //停止软停止	
 0001a4  4608              MOV      r0,r1
 0001a6  6800              LDR      r0,[r0,#0]  ; Flagbits
 0001a8  f4204000          BIC      r0,r0,#0x8000
 0001ac  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;173    }
+;;;155    }
 0001ae  bd10              POP      {r4,pc}
-;;;174    static void Motor2_Stop(void )
+;;;156    static void Motor2_Stop(void )
                           ENDP
 
                   SOFT_Start_M1 PROC
@@ -272,17 +272,17 @@
 0001b0  b510              PUSH     {r4,lr}
 ;;;80     {	
 ;;;81     	MotorTime_Pulse1 = 0;
-0001b2  488d              LDR      r0,|L1.1000|
+0001b2  4872              LDR      r0,|L1.892|
 0001b4  6800              LDR      r0,[r0,#0]  ; Flagbits
 0001b6  f0200001          BIC      r0,r0,#1
-0001ba  498b              LDR      r1,|L1.1000|
+0001ba  4970              LDR      r1,|L1.892|
 0001bc  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;82     	//频率更改标志到达
 ;;;83     	if(Timer_Send_Fre1 == 1)
 0001be  4608              MOV      r0,r1
 0001c0  8800              LDRH     r0,[r0,#0]  ; Flagbits
 0001c2  f3c03040          UBFX     r0,r0,#13,#1
-0001c6  b1d0              CBZ      r0,|L1.510|
+0001c6  b1c8              CBZ      r0,|L1.508|
 ;;;84     	{
 ;;;85     		Timer_Send_Fre1 = 0;//清标志
 0001c8  4608              MOV      r0,r1
@@ -290,69 +290,69 @@
 0001cc  f4205000          BIC      r0,r0,#0x2000
 0001d0  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;86     		Timer0AStart(motor_ss1);	//重置定时器	
-0001d2  4889              LDR      r0,|L1.1016|
+0001d2  486e              LDR      r0,|L1.908|
 0001d4  8800              LDRH     r0,[r0,#0]  ; motor_ss1
 0001d6  f7fffffe          BL       Timer0AStart
 ;;;87     		//软启动整个阶段都可以匹配相应的软停止
 ;;;88     		if(motor_ss1 < FRE_MIN_LIMIT1)
-0001da  4887              LDR      r0,|L1.1016|
+0001da  486c              LDR      r0,|L1.908|
 0001dc  8800              LDRH     r0,[r0,#0]  ; motor_ss1
-0001de  f5b07fc8          CMP      r0,#0x190
-0001e2  da03              BGE      |L1.492|
+0001de  f2413188          MOV      r1,#0x1388
+0001e2  4288              CMP      r0,r1
+0001e4  da03              BGE      |L1.494|
 ;;;89     			Stop_index1 = 1;
-0001e4  2001              MOVS     r0,#1
-0001e6  4987              LDR      r1,|L1.1028|
-0001e8  8008              STRH     r0,[r1,#0]
-0001ea  e008              B        |L1.510|
-                  |L1.492|
+0001e6  2001              MOVS     r0,#1
+0001e8  496b              LDR      r1,|L1.920|
+0001ea  8008              STRH     r0,[r1,#0]
+0001ec  e006              B        |L1.508|
+                  |L1.494|
 ;;;90     		else
 ;;;91     			Stop_index1 = (motor_ss1/temp_stop1)*(SOFT_FRE_STOP_TIME1);
-0001ec  4882              LDR      r0,|L1.1016|
-0001ee  8800              LDRH     r0,[r0,#0]  ; motor_ss1
-0001f0  212d              MOVS     r1,#0x2d
-0001f2  fb90f0f1          SDIV     r0,r0,r1
-0001f6  eb000080          ADD      r0,r0,r0,LSL #2
-0001fa  4982              LDR      r1,|L1.1028|
-0001fc  8008              STRH     r0,[r1,#0]
-                  |L1.510|
+0001ee  4867              LDR      r0,|L1.908|
+0001f0  8800              LDRH     r0,[r0,#0]  ; motor_ss1
+0001f2  212d              MOVS     r1,#0x2d
+0001f4  fb90f0f1          SDIV     r0,r0,r1
+0001f8  4967              LDR      r1,|L1.920|
+0001fa  8008              STRH     r0,[r1,#0]
+                  |L1.508|
 ;;;92     	}//软停止阶段
 ;;;93     	if((M_SS_Fre_stop1 == 0)&&(Step_Num_Cur1.word > (Given_Step1.word - Stop_index1)))
-0001fe  487a              LDR      r0,|L1.1000|
-000200  8800              LDRH     r0,[r0,#0]  ; Flagbits
-000202  f3c030c0          UBFX     r0,r0,#15,#1
-000206  b9c0              CBNZ     r0,|L1.570|
-000208  487a              LDR      r0,|L1.1012|
-00020a  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur1
-00020c  4987              LDR      r1,|L1.1068|
-00020e  8809              LDRH     r1,[r1,#0]  ; Given_Step1
-000210  4a7c              LDR      r2,|L1.1028|
-000212  8812              LDRH     r2,[r2,#0]  ; Stop_index1
-000214  1a89              SUBS     r1,r1,r2
-000216  4288              CMP      r0,r1
-000218  dd0f              BLE      |L1.570|
+0001fc  485f              LDR      r0,|L1.892|
+0001fe  8800              LDRH     r0,[r0,#0]  ; Flagbits
+000200  f3c030c0          UBFX     r0,r0,#15,#1
+000204  b9c8              CBNZ     r0,|L1.570|
+000206  4860              LDR      r0,|L1.904|
+000208  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur1
+00020a  496d              LDR      r1,|L1.960|
+00020c  8809              LDRH     r1,[r1,#0]  ; Given_Step1
+00020e  4a62              LDR      r2,|L1.920|
+000210  8812              LDRH     r2,[r2,#0]  ; Stop_index1
+000212  1a89              SUBS     r1,r1,r2
+000214  4288              CMP      r0,r1
+000216  dd10              BLE      |L1.570|
 ;;;94     	{
 ;;;95     		M_SS_Fre_start1= 0;  //关闭软启动，进入软停止
-00021a  4873              LDR      r0,|L1.1000|
-00021c  6800              LDR      r0,[r0,#0]  ; Flagbits
-00021e  f4204080          BIC      r0,r0,#0x4000
-000222  4971              LDR      r1,|L1.1000|
-000224  6008              STR      r0,[r1,#0]  ; Flagbits
+000218  4858              LDR      r0,|L1.892|
+00021a  6800              LDR      r0,[r0,#0]  ; Flagbits
+00021c  f4204080          BIC      r0,r0,#0x4000
+000220  4956              LDR      r1,|L1.892|
+000222  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;96     		M_SS_Fre_stop1 = 1;              //软停止标志置位
-000226  4608              MOV      r0,r1
-000228  6800              LDR      r0,[r0,#0]  ; Flagbits
-00022a  f4204000          BIC      r0,r0,#0x8000
-00022e  f5004000          ADD      r0,r0,#0x8000
-000232  6008              STR      r0,[r1,#0]  ; Flagbits
+000224  4608              MOV      r0,r1
+000226  6800              LDR      r0,[r0,#0]  ; Flagbits
+000228  f4204000          BIC      r0,r0,#0x8000
+00022c  f5004000          ADD      r0,r0,#0x8000
+000230  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;97     		M_ss_cnt1 = SOFT_FRE_STOP_NUM1;  //软停止的频率变化次数
-000234  203c              MOVS     r0,#0x3c
-000236  496e              LDR      r1,|L1.1008|
+000232  f44f7096          MOV      r0,#0x12c
+000236  4953              LDR      r1,|L1.900|
 000238  8008              STRH     r0,[r1,#0]
                   |L1.570|
 ;;;98     	}//步数走完
 ;;;99     	if(Step_Num_Cur1.word >= Given_Step1.word)
-00023a  486e              LDR      r0,|L1.1012|
+00023a  4853              LDR      r0,|L1.904|
 00023c  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur1
-00023e  497b              LDR      r1,|L1.1068|
+00023e  4960              LDR      r1,|L1.960|
 000240  8809              LDRH     r1,[r1,#0]  ; Given_Step1
 000242  4288              CMP      r0,r1
 000244  db01              BLT      |L1.586|
@@ -360,307 +360,248 @@
 000246  f7fffffe          BL       Motor1_Stop
                   |L1.586|
 ;;;101    	if(Motor_Direction1 == 1)
-00024a  4867              LDR      r0,|L1.1000|
+00024a  484c              LDR      r0,|L1.892|
 00024c  7800              LDRB     r0,[r0,#0]  ; Flagbits
 00024e  f3c01080          UBFX     r0,r0,#6,#1
-000252  b1a0              CBZ      r0,|L1.638|
+000252  b138              CBZ      r0,|L1.612|
 ;;;102    	{
 ;;;103    		if(M1_state.Limit1)
-000254  4865              LDR      r0,|L1.1004|
+000254  484a              LDR      r0,|L1.896|
 000256  7800              LDRB     r0,[r0,#0]  ; M1_state
 000258  f0100f01          TST      r0,#1
-00025c  d024              BEQ      |L1.680|
-;;;104    		{
-;;;105    			Motor1_Stop();
+00025c  d009              BEQ      |L1.626|
+;;;104    			Motor1_Stop();
 00025e  f7fffffe          BL       Motor1_Stop
-;;;106    			Motor_New_Cmd1   = 1;
-000262  4861              LDR      r0,|L1.1000|
-000264  6800              LDR      r0,[r0,#0]  ; Flagbits
-000266  f4207080          BIC      r0,r0,#0x100
-00026a  f5007080          ADD      r0,r0,#0x100
-00026e  495e              LDR      r1,|L1.1000|
-000270  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;107    			Motor_Direction1 = 0;
-000272  4608              MOV      r0,r1
-000274  6800              LDR      r0,[r0,#0]  ; Flagbits
-000276  f0200040          BIC      r0,r0,#0x40
-00027a  6008              STR      r0,[r1,#0]  ; Flagbits
-00027c  e014              B        |L1.680|
-                  |L1.638|
-;;;108    		}
-;;;109    	}
-;;;110    	else
-;;;111    	{
-;;;112    		if(M1_state.Limit2)
-00027e  485b              LDR      r0,|L1.1004|
-000280  7800              LDRB     r0,[r0,#0]  ; M1_state
-000282  f3c00040          UBFX     r0,r0,#1,#1
-000286  b178              CBZ      r0,|L1.680|
-;;;113    		{
-;;;114    			Motor1_Stop();
-000288  f7fffffe          BL       Motor1_Stop
-;;;115    			Motor_New_Cmd1   = 1;
-00028c  4856              LDR      r0,|L1.1000|
-00028e  6800              LDR      r0,[r0,#0]  ; Flagbits
-000290  f4207080          BIC      r0,r0,#0x100
-000294  f5007080          ADD      r0,r0,#0x100
-000298  4953              LDR      r1,|L1.1000|
-00029a  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;116    			Motor_Direction1 = 1;
-00029c  4608              MOV      r0,r1
-00029e  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002a0  f0200040          BIC      r0,r0,#0x40
-0002a4  3040              ADDS     r0,r0,#0x40
-0002a6  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.680|
-;;;117    		}
-;;;118    	}
-;;;119    }
-0002a8  bd10              POP      {r4,pc}
-;;;120    void SOFT_Start_M2(void)
+000262  e006              B        |L1.626|
+                  |L1.612|
+;;;105    	}
+;;;106    	else
+;;;107    	{
+;;;108    		if(M1_state.Limit2)
+000264  4846              LDR      r0,|L1.896|
+000266  7800              LDRB     r0,[r0,#0]  ; M1_state
+000268  f3c00040          UBFX     r0,r0,#1,#1
+00026c  b108              CBZ      r0,|L1.626|
+;;;109    			Motor1_Stop();
+00026e  f7fffffe          BL       Motor1_Stop
+                  |L1.626|
+;;;110    	}
+;;;111    }
+000272  bd10              POP      {r4,pc}
+;;;112    void SOFT_Start_M2(void)
                           ENDP
 
                   Motor2_Stop PROC
-;;;173    }
-;;;174    static void Motor2_Stop(void )
-0002aa  b510              PUSH     {r4,lr}
-;;;175    {
-;;;176    	TimerDisable(TIMER1_BASE, TIMER_A);      //关闭定时器0，停止脉冲反转
-0002ac  21ff              MOVS     r1,#0xff
-0002ae  4860              LDR      r0,|L1.1072|
-0002b0  f7fffffe          BL       TimerDisable
-;;;177    
-;;;178    	MotorTime_Pulse2 = 0; //脉冲停止	
-0002b4  484c              LDR      r0,|L1.1000|
-0002b6  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002b8  f0200002          BIC      r0,r0,#2
-0002bc  494a              LDR      r1,|L1.1000|
-0002be  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;179    	Motor_Hold2      = 1; //电机处于停止保持状态
-0002c0  4608              MOV      r0,r1
-0002c2  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002c4  f0200020          BIC      r0,r0,#0x20
-0002c8  3020              ADDS     r0,r0,#0x20
-0002ca  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;180    	Timer_Send_Fre2  = 0; //清空Timer2频率更改标志
-0002cc  4608              MOV      r0,r1
-0002ce  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002d0  f4203080          BIC      r0,r0,#0x10000
-0002d4  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;181    	M_SS_Fre_start2  = 0; //停止软启动
-0002d6  4608              MOV      r0,r1
-0002d8  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002da  f4203000          BIC      r0,r0,#0x20000
-0002de  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;182    	M_SS_Fre_stop2   = 0; //停止软停止	
-0002e0  4608              MOV      r0,r1
-0002e2  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002e4  f4202080          BIC      r0,r0,#0x40000
-0002e8  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;183    }
-0002ea  bd10              POP      {r4,pc}
-;;;184    
+;;;155    }
+;;;156    static void Motor2_Stop(void )
+000274  b510              PUSH     {r4,lr}
+;;;157    {
+;;;158    	TimerDisable(TIMER1_BASE, TIMER_A);      //关闭定时器0，停止脉冲反转
+000276  21ff              MOVS     r1,#0xff
+000278  4852              LDR      r0,|L1.964|
+00027a  f7fffffe          BL       TimerDisable
+;;;159    
+;;;160    	MotorTime_Pulse2 = 0; //脉冲停止	
+00027e  483f              LDR      r0,|L1.892|
+000280  6800              LDR      r0,[r0,#0]  ; Flagbits
+000282  f0200002          BIC      r0,r0,#2
+000286  493d              LDR      r1,|L1.892|
+000288  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;161    	Motor_Hold2      = 1; //电机处于停止保持状态
+00028a  4608              MOV      r0,r1
+00028c  6800              LDR      r0,[r0,#0]  ; Flagbits
+00028e  f0200020          BIC      r0,r0,#0x20
+000292  3020              ADDS     r0,r0,#0x20
+000294  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;162    	Timer_Send_Fre2  = 0; //清空Timer2频率更改标志
+000296  4608              MOV      r0,r1
+000298  6800              LDR      r0,[r0,#0]  ; Flagbits
+00029a  f4203080          BIC      r0,r0,#0x10000
+00029e  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;163    	M_SS_Fre_start2  = 0; //停止软启动
+0002a0  4608              MOV      r0,r1
+0002a2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002a4  f4203000          BIC      r0,r0,#0x20000
+0002a8  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;164    	M_SS_Fre_stop2   = 0; //停止软停止	
+0002aa  4608              MOV      r0,r1
+0002ac  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002ae  f4202080          BIC      r0,r0,#0x40000
+0002b2  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;165    }
+0002b4  bd10              POP      {r4,pc}
+;;;166    
                           ENDP
 
                   SOFT_Start_M2 PROC
-;;;119    }
-;;;120    void SOFT_Start_M2(void)
-0002ec  b510              PUSH     {r4,lr}
-;;;121    {   
-;;;122    	MotorTime_Pulse2 = 0;
-0002ee  483e              LDR      r0,|L1.1000|
-0002f0  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002f2  f0200002          BIC      r0,r0,#2
-0002f6  493c              LDR      r1,|L1.1000|
-0002f8  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;123    	//软启停频率更改阶段
-;;;124    	if(Timer_Send_Fre2 == 1)
-0002fa  4608              MOV      r0,r1
-0002fc  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002fe  f3c04000          UBFX     r0,r0,#16,#1
-000302  b1d0              CBZ      r0,|L1.826|
-;;;125    	{
-;;;126    		Timer_Send_Fre2 = 0;//清除Timer2发送的频率更改标志
-000304  4608              MOV      r0,r1
-000306  6800              LDR      r0,[r0,#0]  ; Flagbits
-000308  f4203080          BIC      r0,r0,#0x10000
-00030c  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;127    		Timer1AStart(motor_ss2);
-00030e  4841              LDR      r0,|L1.1044|
-000310  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-000312  f7fffffe          BL       Timer1AStart
-;;;128    		//软启动在哪个频率，相应的软停止步数也跟着变
-;;;129    		if(motor_ss2 < FRE_MIN_LIMIT2)
-000316  483f              LDR      r0,|L1.1044|
-000318  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-00031a  f5b07fc8          CMP      r0,#0x190
-00031e  da03              BGE      |L1.808|
-;;;130    			Stop_index2 = 0;
-000320  2000              MOVS     r0,#0
-000322  493f              LDR      r1,|L1.1056|
-000324  8008              STRH     r0,[r1,#0]
-000326  e008              B        |L1.826|
-                  |L1.808|
-;;;131    		else
-;;;132    			Stop_index2 = (motor_ss2/temp_stop2)*(SOFT_FRE_STOP_TIME2);
-000328  483a              LDR      r0,|L1.1044|
-00032a  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-00032c  216e              MOVS     r1,#0x6e
-00032e  fb90f0f1          SDIV     r0,r0,r1
-000332  eb000080          ADD      r0,r0,r0,LSL #2
-000336  493a              LDR      r1,|L1.1056|
-000338  8008              STRH     r0,[r1,#0]
-                  |L1.826|
-;;;133    	}//软停止阶段
-;;;134    	if((M_SS_Fre_stop2 == 0)&&(Step_Num_Cur2.word > (Given_Step2.word - Stop_index2)))
-00033a  482b              LDR      r0,|L1.1000|
-00033c  6800              LDR      r0,[r0,#0]  ; Flagbits
-00033e  f3c04080          UBFX     r0,r0,#18,#1
-000342  b9c0              CBNZ     r0,|L1.886|
-000344  4832              LDR      r0,|L1.1040|
-000346  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur2
-000348  493a              LDR      r1,|L1.1076|
-00034a  8809              LDRH     r1,[r1,#0]  ; Given_Step2
-00034c  4a34              LDR      r2,|L1.1056|
-00034e  8812              LDRH     r2,[r2,#0]  ; Stop_index2
-000350  1a89              SUBS     r1,r1,r2
-000352  4288              CMP      r0,r1
-000354  dd0f              BLE      |L1.886|
-;;;135    	{
-;;;136    		M_SS_Fre_start2= 0;   //关闭软启动，进入软停止
-000356  4824              LDR      r0,|L1.1000|
-000358  6800              LDR      r0,[r0,#0]  ; Flagbits
-00035a  f4203000          BIC      r0,r0,#0x20000
-00035e  4922              LDR      r1,|L1.1000|
-000360  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;137    		M_SS_Fre_stop2 = 1;   //软停止标志置位
-000362  4608              MOV      r0,r1
-000364  6800              LDR      r0,[r0,#0]  ; Flagbits
-000366  f4202080          BIC      r0,r0,#0x40000
-00036a  f5002080          ADD      r0,r0,#0x40000
-00036e  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;138    		M_ss_cnt2 = SOFT_FRE_STOP_NUM2;  //软停止的频率变化次数
-000370  203c              MOVS     r0,#0x3c
-000372  4926              LDR      r1,|L1.1036|
-000374  8008              STRH     r0,[r1,#0]
-                  |L1.886|
-;;;139    	}//步数走完
-;;;140    	if(Step_Num_Cur2.word >= Given_Step2.word) 
-000376  4826              LDR      r0,|L1.1040|
-000378  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur2
-00037a  492e              LDR      r1,|L1.1076|
-00037c  8809              LDRH     r1,[r1,#0]  ; Given_Step2
-00037e  4288              CMP      r0,r1
-000380  db01              BLT      |L1.902|
-;;;141    		Motor2_Stop();
-000382  f7fffffe          BL       Motor2_Stop
-                  |L1.902|
-;;;142    
-;;;143    	if(Motor_Direction2 == 1) //判断电机运行方向
-000386  4818              LDR      r0,|L1.1000|
-000388  7800              LDRB     r0,[r0,#0]  ; Flagbits
-00038a  f3c010c0          UBFX     r0,r0,#7,#1
-00038e  b1a0              CBZ      r0,|L1.954|
-;;;144    	{
-;;;145    		if(M2_state.Limit1)     //判断是否压到运行方向上的限位
-000390  4829              LDR      r0,|L1.1080|
-000392  7800              LDRB     r0,[r0,#0]  ; M2_state
-000394  f0100f01          TST      r0,#1
-000398  d024              BEQ      |L1.996|
-;;;146    		{
-;;;147    			Motor2_Stop();
-00039a  f7fffffe          BL       Motor2_Stop
-;;;148    			
-;;;149    			Motor_New_Cmd2   = 1;
-00039e  4812              LDR      r0,|L1.1000|
-0003a0  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003a2  f4207000          BIC      r0,r0,#0x200
-0003a6  f5007000          ADD      r0,r0,#0x200
-0003aa  490f              LDR      r1,|L1.1000|
-0003ac  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;150    			Motor_Direction2 = 0;
-0003ae  4608              MOV      r0,r1
-0003b0  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003b2  f0200080          BIC      r0,r0,#0x80
-0003b6  6008              STR      r0,[r1,#0]  ; Flagbits
-0003b8  e014              B        |L1.996|
-                  |L1.954|
-;;;151    		}
-;;;152    	}
-;;;153    	else                      //判断电机运行方向
-;;;154    	{
-;;;155    		if(M2_state.Limit2)     //判断是否压到运行方向上的限位
-0003ba  481f              LDR      r0,|L1.1080|
-0003bc  7800              LDRB     r0,[r0,#0]  ; M2_state
-0003be  f3c00040          UBFX     r0,r0,#1,#1
-0003c2  b178              CBZ      r0,|L1.996|
-;;;156    		{
-;;;157    			Motor2_Stop();
-0003c4  f7fffffe          BL       Motor2_Stop
-;;;158    			
-;;;159    			Motor_New_Cmd2   = 1;
-0003c8  4807              LDR      r0,|L1.1000|
-0003ca  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003cc  f4207000          BIC      r0,r0,#0x200
-0003d0  f5007000          ADD      r0,r0,#0x200
-0003d4  4904              LDR      r1,|L1.1000|
-0003d6  6008              STR      r0,[r1,#0]  ; Flagbits
-;;;160    			Motor_Direction2 = 1;
-0003d8  4608              MOV      r0,r1
-0003da  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003dc  f0200080          BIC      r0,r0,#0x80
-0003e0  3080              ADDS     r0,r0,#0x80
-0003e2  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.996|
-;;;161    		}
-;;;162    	}
-;;;163    }
-0003e4  bd10              POP      {r4,pc}
-0003e6  0000              DCW      0x0000
-                  |L1.1000|
-                          DCD      Flagbits
-                  |L1.1004|
-                          DCD      M1_state
-                  |L1.1008|
-                          DCD      M_ss_cnt1
-                  |L1.1012|
-                          DCD      Step_Num_Cur1
-                  |L1.1016|
-                          DCD      motor_ss1
-                  |L1.1020|
-                          DCD      Fre_Fuzhi11
-                  |L1.1024|
-                          DCD      Fre_Fuzhi12
-                  |L1.1028|
-                          DCD      Stop_index1
-                  |L1.1032|
-                          DCD      0x40006000
-                  |L1.1036|
-                          DCD      M_ss_cnt2
-                  |L1.1040|
-                          DCD      Step_Num_Cur2
-                  |L1.1044|
-                          DCD      motor_ss2
-                  |L1.1048|
-                          DCD      Fre_Fuzhi21
-                  |L1.1052|
-                          DCD      Fre_Fuzhi22
-                  |L1.1056|
-                          DCD      Stop_index2
-                  |L1.1060|
-                          DCD      0x40007000
-                  |L1.1064|
-                          DCD      0x40030000
-                  |L1.1068|
-                          DCD      Given_Step1
-                  |L1.1072|
-                          DCD      0x40031000
-                  |L1.1076|
-                          DCD      Given_Step2
-                  |L1.1080|
-                          DCD      M2_state
+;;;111    }
+;;;112    void SOFT_Start_M2(void)
+0002b6  b510              PUSH     {r4,lr}
+;;;113    {   
+;;;114    	MotorTime_Pulse2 = 0;
+0002b8  4830              LDR      r0,|L1.892|
+0002ba  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002bc  f0200002          BIC      r0,r0,#2
+0002c0  492e              LDR      r1,|L1.892|
+0002c2  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;115    	//软启停频率更改阶段
+;;;116    	if(Timer_Send_Fre2 == 1)
+0002c4  4608              MOV      r0,r1
+0002c6  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002c8  f3c04000          UBFX     r0,r0,#16,#1
+0002cc  b1c8              CBZ      r0,|L1.770|
+;;;117    	{
+;;;118    		Timer_Send_Fre2 = 0;//清除Timer2发送的频率更改标志
+0002ce  4608              MOV      r0,r1
+0002d0  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002d2  f4203080          BIC      r0,r0,#0x10000
+0002d6  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;119    		Timer1AStart(motor_ss2);
+0002d8  4833              LDR      r0,|L1.936|
+0002da  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+0002dc  f7fffffe          BL       Timer1AStart
+;;;120    		//软启动在哪个频率，相应的软停止步数也跟着变
+;;;121    		if(motor_ss2 < FRE_MIN_LIMIT2)
+0002e0  4831              LDR      r0,|L1.936|
+0002e2  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+0002e4  f24041e2          MOV      r1,#0x4e2
+0002e8  4288              CMP      r0,r1
+0002ea  da03              BGE      |L1.756|
+;;;122    			Stop_index2 = 0;
+0002ec  2000              MOVS     r0,#0
+0002ee  4931              LDR      r1,|L1.948|
+0002f0  8008              STRH     r0,[r1,#0]
+0002f2  e006              B        |L1.770|
+                  |L1.756|
+;;;123    		else
+;;;124    			Stop_index2 = (motor_ss2/temp_stop2)*(SOFT_FRE_STOP_TIME2);
+0002f4  482c              LDR      r0,|L1.936|
+0002f6  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+0002f8  216e              MOVS     r1,#0x6e
+0002fa  fb90f0f1          SDIV     r0,r0,r1
+0002fe  492d              LDR      r1,|L1.948|
+000300  8008              STRH     r0,[r1,#0]
+                  |L1.770|
+;;;125    	}//软停止阶段
+;;;126    	if((M_SS_Fre_stop2 == 0)&&(Step_Num_Cur2.word > (Given_Step2.word - Stop_index2)))
+000302  481e              LDR      r0,|L1.892|
+000304  6800              LDR      r0,[r0,#0]  ; Flagbits
+000306  f3c04080          UBFX     r0,r0,#18,#1
+00030a  b9c8              CBNZ     r0,|L1.832|
+00030c  4825              LDR      r0,|L1.932|
+00030e  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur2
+000310  492d              LDR      r1,|L1.968|
+000312  8809              LDRH     r1,[r1,#0]  ; Given_Step2
+000314  4a27              LDR      r2,|L1.948|
+000316  8812              LDRH     r2,[r2,#0]  ; Stop_index2
+000318  1a89              SUBS     r1,r1,r2
+00031a  4288              CMP      r0,r1
+00031c  dd10              BLE      |L1.832|
+;;;127    	{
+;;;128    		M_SS_Fre_start2= 0;   //关闭软启动，进入软停止
+00031e  4817              LDR      r0,|L1.892|
+000320  6800              LDR      r0,[r0,#0]  ; Flagbits
+000322  f4203000          BIC      r0,r0,#0x20000
+000326  4915              LDR      r1,|L1.892|
+000328  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;129    		M_SS_Fre_stop2 = 1;   //软停止标志置位
+00032a  4608              MOV      r0,r1
+00032c  6800              LDR      r0,[r0,#0]  ; Flagbits
+00032e  f4202080          BIC      r0,r0,#0x40000
+000332  f5002080          ADD      r0,r0,#0x40000
+000336  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;130    		M_ss_cnt2 = SOFT_FRE_STOP_NUM2;  //软停止的频率变化次数
+000338  f44f7096          MOV      r0,#0x12c
+00033c  4918              LDR      r1,|L1.928|
+00033e  8008              STRH     r0,[r1,#0]
+                  |L1.832|
+;;;131    	}//步数走完
+;;;132    	if(Step_Num_Cur2.word >= Given_Step2.word) 
+000340  4818              LDR      r0,|L1.932|
+000342  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur2
+000344  4920              LDR      r1,|L1.968|
+000346  8809              LDRH     r1,[r1,#0]  ; Given_Step2
+000348  4288              CMP      r0,r1
+00034a  db01              BLT      |L1.848|
+;;;133    		Motor2_Stop();
+00034c  f7fffffe          BL       Motor2_Stop
+                  |L1.848|
+;;;134    
+;;;135    	if(Motor_Direction2 == 1) //判断电机运行方向
+000350  480a              LDR      r0,|L1.892|
+000352  7800              LDRB     r0,[r0,#0]  ; Flagbits
+000354  f3c010c0          UBFX     r0,r0,#7,#1
+000358  b138              CBZ      r0,|L1.874|
+;;;136    	{
+;;;137    		if(M2_state.Limit1)     //判断是否压到运行方向上的限位
+00035a  481c              LDR      r0,|L1.972|
+00035c  7800              LDRB     r0,[r0,#0]  ; M2_state
+00035e  f0100f01          TST      r0,#1
+000362  d009              BEQ      |L1.888|
+;;;138    			Motor2_Stop();
+000364  f7fffffe          BL       Motor2_Stop
+000368  e006              B        |L1.888|
+                  |L1.874|
+;;;139    	}
+;;;140    	else                      //判断电机运行方向
+;;;141    	{
+;;;142    		if(M2_state.Limit2)     //判断是否压到运行方向上的限位
+00036a  4818              LDR      r0,|L1.972|
+00036c  7800              LDRB     r0,[r0,#0]  ; M2_state
+00036e  f3c00040          UBFX     r0,r0,#1,#1
+000372  b108              CBZ      r0,|L1.888|
+;;;143    			Motor2_Stop();
+000374  f7fffffe          BL       Motor2_Stop
+                  |L1.888|
+;;;144    	}
+;;;145    }
+000378  bd10              POP      {r4,pc}
+;;;146    static void Motor1_Stop(void )
                           ENDP
 
+00037a  0000              DCW      0x0000
+                  |L1.892|
+                          DCD      Flagbits
+                  |L1.896|
+                          DCD      M1_state
+                  |L1.900|
+                          DCD      M_ss_cnt1
+                  |L1.904|
+                          DCD      Step_Num_Cur1
+                  |L1.908|
+                          DCD      motor_ss1
+                  |L1.912|
+                          DCD      Fre_Fuzhi11
+                  |L1.916|
+                          DCD      Fre_Fuzhi12
+                  |L1.920|
+                          DCD      Stop_index1
+                  |L1.924|
+                          DCD      0x40006000
+                  |L1.928|
+                          DCD      M_ss_cnt2
+                  |L1.932|
+                          DCD      Step_Num_Cur2
+                  |L1.936|
+                          DCD      motor_ss2
+                  |L1.940|
+                          DCD      Fre_Fuzhi21
+                  |L1.944|
+                          DCD      Fre_Fuzhi22
+                  |L1.948|
+                          DCD      Stop_index2
+                  |L1.952|
+                          DCD      0x40007000
+                  |L1.956|
+                          DCD      0x40030000
+                  |L1.960|
+                          DCD      Given_Step1
+                  |L1.964|
+                          DCD      0x40031000
+                  |L1.968|
+                          DCD      Given_Step2
+                  |L1.972|
+                          DCD      M2_state
 
                           AREA ||.data||, DATA, ALIGN=1
 

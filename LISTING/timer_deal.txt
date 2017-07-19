@@ -11,14 +11,14 @@
 ;;;11     {
 ;;;12     	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 000002  2101              MOVS     r1,#1
-000004  48f4              LDR      r0,|L1.984|
+000004  48e1              LDR      r0,|L1.908|
 000006  f7fffffe          BL       TimerIntClear
 ;;;13     	MotorTime_Pulse1 = 1;    //通知 main() 软启停
-00000a  48f4              LDR      r0,|L1.988|
+00000a  48e1              LDR      r0,|L1.912|
 00000c  6800              LDR      r0,[r0,#0]  ; Flagbits
 00000e  f0200001          BIC      r0,r0,#1
 000012  1c40              ADDS     r0,r0,#1
-000014  49f1              LDR      r1,|L1.988|
+000014  49de              LDR      r1,|L1.912|
 000016  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;14     	if(Motor_reversal1 == 0)
 000018  4608              MOV      r0,r1
@@ -32,23 +32,23 @@
 000028  2280              MOVS     r2,#0x80
 00002a  4611              MOV      r1,r2
 00002c  6803              LDR      r3,[r0,#0]
-00002e  48ec              LDR      r0,|L1.992|
+00002e  48d9              LDR      r0,|L1.916|
 000030  4798              BLX      r3
 ;;;17     		Motor_reversal1 = 1;						 
-000032  48ea              LDR      r0,|L1.988|
+000032  48d7              LDR      r0,|L1.912|
 000034  6800              LDR      r0,[r0,#0]  ; Flagbits
 000036  f0200004          BIC      r0,r0,#4
 00003a  1d00              ADDS     r0,r0,#4
-00003c  49e7              LDR      r1,|L1.988|
+00003c  49d4              LDR      r1,|L1.912|
 00003e  6008              STR      r0,[r1,#0]  ; Flagbits
-000040  e012              B        |L1.104|
+000040  e017              B        |L1.114|
                   |L1.66|
 ;;;18     	}
 ;;;19     	else if(Motor_reversal1 == 1)
-000042  48e6              LDR      r0,|L1.988|
+000042  48d3              LDR      r0,|L1.912|
 000044  7800              LDRB     r0,[r0,#0]  ; Flagbits
 000046  f3c00080          UBFX     r0,r0,#2,#1
-00004a  b168              CBZ      r0,|L1.104|
+00004a  b190              CBZ      r0,|L1.114|
 ;;;20     	{
 ;;;21     		M1_Pulse_Low; 
 00004c  f04f7080          MOV      r0,#0x1000000
@@ -56,596 +56,544 @@
 000052  2200              MOVS     r2,#0
 000054  2180              MOVS     r1,#0x80
 000056  6803              LDR      r3,[r0,#0]
-000058  48e1              LDR      r0,|L1.992|
+000058  48ce              LDR      r0,|L1.916|
 00005a  4798              BLX      r3
 ;;;22     		Motor_reversal1 = 0;
-00005c  48df              LDR      r0,|L1.988|
+00005c  48cc              LDR      r0,|L1.912|
 00005e  6800              LDR      r0,[r0,#0]  ; Flagbits
 000060  f0200004          BIC      r0,r0,#4
-000064  49dd              LDR      r1,|L1.988|
+000064  49ca              LDR      r1,|L1.912|
 000066  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.104|
-;;;23     //		Step_Num_Cur1.word ++; // 步数自增
+;;;23     		Step_Num_Cur1.word ++; // 步数自增
+000068  48cb              LDR      r0,|L1.920|
+00006a  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur1
+00006c  1c40              ADDS     r0,r0,#1
+00006e  49ca              LDR      r1,|L1.920|
+000070  8008              STRH     r0,[r1,#0]
+                  |L1.114|
 ;;;24     	}
 ;;;25     	
 ;;;26     }  
-000068  bd10              POP      {r4,pc}
+000072  bd10              POP      {r4,pc}
 ;;;27     void Timer1AHandler(void)
                           ENDP
 
                   Timer1AHandler PROC
-00006a  b510              PUSH     {r4,lr}
+000074  b510              PUSH     {r4,lr}
 ;;;28     {
 ;;;29     	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-00006c  2101              MOVS     r1,#1
-00006e  48dd              LDR      r0,|L1.996|
-000070  f7fffffe          BL       TimerIntClear
+000076  2101              MOVS     r1,#1
+000078  48c8              LDR      r0,|L1.924|
+00007a  f7fffffe          BL       TimerIntClear
 ;;;30     	MotorTime_Pulse2 = 1;    //通知 main() 软启停
-000074  48d9              LDR      r0,|L1.988|
-000076  6800              LDR      r0,[r0,#0]  ; Flagbits
-000078  f0200002          BIC      r0,r0,#2
-00007c  1c80              ADDS     r0,r0,#2
-00007e  49d7              LDR      r1,|L1.988|
-000080  6008              STR      r0,[r1,#0]  ; Flagbits
+00007e  48c4              LDR      r0,|L1.912|
+000080  6800              LDR      r0,[r0,#0]  ; Flagbits
+000082  f0200002          BIC      r0,r0,#2
+000086  1c80              ADDS     r0,r0,#2
+000088  49c1              LDR      r1,|L1.912|
+00008a  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;31     	if(Motor_reversal2 == 0)
-000082  4608              MOV      r0,r1
-000084  7800              LDRB     r0,[r0,#0]  ; Flagbits
-000086  f3c000c0          UBFX     r0,r0,#3,#1
-00008a  b978              CBNZ     r0,|L1.172|
+00008c  4608              MOV      r0,r1
+00008e  7800              LDRB     r0,[r0,#0]  ; Flagbits
+000090  f3c000c0          UBFX     r0,r0,#3,#1
+000094  b978              CBNZ     r0,|L1.182|
 ;;;32     	{
 ;;;33     		M2_Pulse_High;
-00008c  f04f7080          MOV      r0,#0x1000000
-000090  6a00              LDR      r0,[r0,#0x20]
-000092  2202              MOVS     r2,#2
-000094  4611              MOV      r1,r2
-000096  6803              LDR      r3,[r0,#0]
-000098  48d3              LDR      r0,|L1.1000|
-00009a  4798              BLX      r3
+000096  f04f7080          MOV      r0,#0x1000000
+00009a  6a00              LDR      r0,[r0,#0x20]
+00009c  2202              MOVS     r2,#2
+00009e  4611              MOV      r1,r2
+0000a0  6803              LDR      r3,[r0,#0]
+0000a2  48bf              LDR      r0,|L1.928|
+0000a4  4798              BLX      r3
 ;;;34     		Motor_reversal2 = 1;						 
-00009c  48cf              LDR      r0,|L1.988|
-00009e  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000a0  f0200008          BIC      r0,r0,#8
-0000a4  3008              ADDS     r0,r0,#8
-0000a6  49cd              LDR      r1,|L1.988|
-0000a8  6008              STR      r0,[r1,#0]  ; Flagbits
-0000aa  e012              B        |L1.210|
-                  |L1.172|
+0000a6  48ba              LDR      r0,|L1.912|
+0000a8  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000aa  f0200008          BIC      r0,r0,#8
+0000ae  3008              ADDS     r0,r0,#8
+0000b0  49b7              LDR      r1,|L1.912|
+0000b2  6008              STR      r0,[r1,#0]  ; Flagbits
+0000b4  e017              B        |L1.230|
+                  |L1.182|
 ;;;35     	}
 ;;;36     	else if(Motor_reversal2 == 1)
-0000ac  48cb              LDR      r0,|L1.988|
-0000ae  7800              LDRB     r0,[r0,#0]  ; Flagbits
-0000b0  f3c000c0          UBFX     r0,r0,#3,#1
-0000b4  b168              CBZ      r0,|L1.210|
+0000b6  48b6              LDR      r0,|L1.912|
+0000b8  7800              LDRB     r0,[r0,#0]  ; Flagbits
+0000ba  f3c000c0          UBFX     r0,r0,#3,#1
+0000be  b190              CBZ      r0,|L1.230|
 ;;;37     	{
 ;;;38     		M2_Pulse_Low; 
-0000b6  f04f7080          MOV      r0,#0x1000000
-0000ba  6a00              LDR      r0,[r0,#0x20]
-0000bc  2200              MOVS     r2,#0
-0000be  2102              MOVS     r1,#2
-0000c0  6803              LDR      r3,[r0,#0]
-0000c2  48c9              LDR      r0,|L1.1000|
-0000c4  4798              BLX      r3
+0000c0  f04f7080          MOV      r0,#0x1000000
+0000c4  6a00              LDR      r0,[r0,#0x20]
+0000c6  2200              MOVS     r2,#0
+0000c8  2102              MOVS     r1,#2
+0000ca  6803              LDR      r3,[r0,#0]
+0000cc  48b4              LDR      r0,|L1.928|
+0000ce  4798              BLX      r3
 ;;;39     		Motor_reversal2 = 0;
-0000c6  48c5              LDR      r0,|L1.988|
-0000c8  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000ca  f0200008          BIC      r0,r0,#8
-0000ce  49c3              LDR      r1,|L1.988|
-0000d0  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.210|
-;;;40     //		Step_Num_Cur2.word ++; // 步数自增
+0000d0  48af              LDR      r0,|L1.912|
+0000d2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0000d4  f0200008          BIC      r0,r0,#8
+0000d8  49ad              LDR      r1,|L1.912|
+0000da  6008              STR      r0,[r1,#0]  ; Flagbits
+;;;40     		Step_Num_Cur2.word ++; // 步数自增
+0000dc  48b1              LDR      r0,|L1.932|
+0000de  8800              LDRH     r0,[r0,#0]  ; Step_Num_Cur2
+0000e0  1c40              ADDS     r0,r0,#1
+0000e2  49b0              LDR      r1,|L1.932|
+0000e4  8008              STRH     r0,[r1,#0]
+                  |L1.230|
 ;;;41     	}  
 ;;;42     }
-0000d2  bd10              POP      {r4,pc}
+0000e6  bd10              POP      {r4,pc}
 ;;;43     
                           ENDP
 
                   Timer2AHandler PROC
 ;;;52     static uint8_t can1StartSend[8];
 ;;;53     void Timer2AHandler(void)
-0000d4  b510              PUSH     {r4,lr}
+0000e8  b510              PUSH     {r4,lr}
 ;;;54     {
 ;;;55     	
 ;;;56     	
 ;;;57     	static uint16_t  Timer2_cnt = 0;
 ;;;58     	static uint8_t   start_cnt = 0;
 ;;;59     	TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
-0000d6  2101              MOVS     r1,#1
-0000d8  48c4              LDR      r0,|L1.1004|
-0000da  f7fffffe          BL       TimerIntClear
+0000ea  2101              MOVS     r1,#1
+0000ec  48ae              LDR      r0,|L1.936|
+0000ee  f7fffffe          BL       TimerIntClear
 ;;;60     
 ;;;61     	Timer2_cnt ++;
-0000de  48c4              LDR      r0,|L1.1008|
-0000e0  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-0000e2  1c40              ADDS     r0,r0,#1
-0000e4  49c2              LDR      r1,|L1.1008|
-0000e6  8008              STRH     r0,[r1,#0]
+0000f2  48ae              LDR      r0,|L1.940|
+0000f4  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
+0000f6  1c40              ADDS     r0,r0,#1
+0000f8  49ac              LDR      r1,|L1.940|
+0000fa  8008              STRH     r0,[r1,#0]
 ;;;62     	if(Timer2_cnt >= 40&&(Drive_Limit_Time == 0))//延时40ms使能驱动
-0000e8  4608              MOV      r0,r1
-0000ea  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-0000ec  2828              CMP      r0,#0x28
-0000ee  db1c              BLT      |L1.298|
-0000f0  48ba              LDR      r0,|L1.988|
-0000f2  8800              LDRH     r0,[r0,#0]  ; Flagbits
-0000f4  f3c03000          UBFX     r0,r0,#12,#1
-0000f8  b9b8              CBNZ     r0,|L1.298|
+0000fc  4608              MOV      r0,r1
+0000fe  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
+000100  2828              CMP      r0,#0x28
+000102  db1c              BLT      |L1.318|
+000104  48a2              LDR      r0,|L1.912|
+000106  8800              LDRH     r0,[r0,#0]  ; Flagbits
+000108  f3c03000          UBFX     r0,r0,#12,#1
+00010c  b9b8              CBNZ     r0,|L1.318|
 ;;;63     	{
 ;;;64     		Drive_Limit_Time=1;
-0000fa  48b8              LDR      r0,|L1.988|
-0000fc  6800              LDR      r0,[r0,#0]  ; Flagbits
-0000fe  f4205080          BIC      r0,r0,#0x1000
-000102  f5005080          ADD      r0,r0,#0x1000
-000106  49b5              LDR      r1,|L1.988|
-000108  6008              STR      r0,[r1,#0]  ; Flagbits
+00010e  48a0              LDR      r0,|L1.912|
+000110  6800              LDR      r0,[r0,#0]  ; Flagbits
+000112  f4205080          BIC      r0,r0,#0x1000
+000116  f5005080          ADD      r0,r0,#0x1000
+00011a  499d              LDR      r1,|L1.912|
+00011c  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;65     		M1_Enable;
-00010a  f04f7080          MOV      r0,#0x1000000
-00010e  6a00              LDR      r0,[r0,#0x20]
-000110  2200              MOVS     r2,#0
-000112  2120              MOVS     r1,#0x20
-000114  6803              LDR      r3,[r0,#0]
-000116  48b7              LDR      r0,|L1.1012|
-000118  4798              BLX      r3
+00011e  f04f7080          MOV      r0,#0x1000000
+000122  6a00              LDR      r0,[r0,#0x20]
+000124  2200              MOVS     r2,#0
+000126  2120              MOVS     r1,#0x20
+000128  6803              LDR      r3,[r0,#0]
+00012a  48a1              LDR      r0,|L1.944|
+00012c  4798              BLX      r3
 ;;;66     		M2_Enable;
-00011a  f04f7080          MOV      r0,#0x1000000
-00011e  6a00              LDR      r0,[r0,#0x20]
-000120  2200              MOVS     r2,#0
-000122  2101              MOVS     r1,#1
-000124  6803              LDR      r3,[r0,#0]
-000126  48b0              LDR      r0,|L1.1000|
-000128  4798              BLX      r3
-                  |L1.298|
+00012e  f04f7080          MOV      r0,#0x1000000
+000132  6a00              LDR      r0,[r0,#0x20]
+000134  2200              MOVS     r2,#0
+000136  2101              MOVS     r1,#1
+000138  6803              LDR      r3,[r0,#0]
+00013a  4899              LDR      r0,|L1.928|
+00013c  4798              BLX      r3
+                  |L1.318|
 ;;;67     	}//电机 1 软启动阶段
 ;;;68     	if((M_SS_Fre_start1 == 1)&&(M_ss_cnt1 < SOFT_FRE_START_NUM1)&&\
-00012a  48ac              LDR      r0,|L1.988|
-00012c  8800              LDRH     r0,[r0,#0]  ; Flagbits
-00012e  f3c03080          UBFX     r0,r0,#14,#1
-000132  b398              CBZ      r0,|L1.412|
-000134  48b0              LDR      r0,|L1.1016|
-000136  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
-000138  283c              CMP      r0,#0x3c
-00013a  da2f              BGE      |L1.412|
+00013e  4894              LDR      r0,|L1.912|
+000140  8800              LDRH     r0,[r0,#0]  ; Flagbits
+000142  f3c03080          UBFX     r0,r0,#14,#1
+000146  b380              CBZ      r0,|L1.426|
+000148  489a              LDR      r0,|L1.948|
+00014a  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
+00014c  f5b07f96          CMP      r0,#0x12c
+000150  da2b              BGE      |L1.426|
 ;;;69     			   (Timer2_cnt % SOFT_FRE_START_TIME1 == 0))
-00013c  48ac              LDR      r0,|L1.1008|
-00013e  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-000140  2105              MOVS     r1,#5
-000142  fb90f2f1          SDIV     r2,r0,r1
-000146  fb010012          MLS      r0,r1,r2,r0
-00014a  bb38              CBNZ     r0,|L1.412|
+000152  2000              MOVS     r0,#0
+000154  4280              CMP      r0,r0
+000156  d128              BNE      |L1.426|
 ;;;70     	{
 ;;;71     		motor_ss1 = motor_ss1 +  Fre_Fuzhi11;
-00014c  48ab              LDR      r0,|L1.1020|
-00014e  8800              LDRH     r0,[r0,#0]  ; motor_ss1
-000150  49ab              LDR      r1,|L1.1024|
-000152  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi11
-000154  4408              ADD      r0,r0,r1
-000156  49a9              LDR      r1,|L1.1020|
-000158  8008              STRH     r0,[r1,#0]
+000158  4897              LDR      r0,|L1.952|
+00015a  8800              LDRH     r0,[r0,#0]  ; motor_ss1
+00015c  4997              LDR      r1,|L1.956|
+00015e  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi11
+000160  4408              ADD      r0,r0,r1
+000162  4995              LDR      r1,|L1.952|
+000164  8008              STRH     r0,[r1,#0]
 ;;;72     		M_ss_cnt1 ++;
-00015a  48a7              LDR      r0,|L1.1016|
-00015c  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
-00015e  1c40              ADDS     r0,r0,#1
-000160  49a5              LDR      r1,|L1.1016|
-000162  8008              STRH     r0,[r1,#0]
+000166  4893              LDR      r0,|L1.948|
+000168  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
+00016a  1c40              ADDS     r0,r0,#1
+00016c  4991              LDR      r1,|L1.948|
+00016e  8008              STRH     r0,[r1,#0]
 ;;;73     		Timer_Send_Fre1 = 1;
-000164  489d              LDR      r0,|L1.988|
-000166  6800              LDR      r0,[r0,#0]  ; Flagbits
-000168  f4205000          BIC      r0,r0,#0x2000
-00016c  f5005000          ADD      r0,r0,#0x2000
-000170  499a              LDR      r1,|L1.988|
-000172  6008              STR      r0,[r1,#0]  ; Flagbits
+000170  4887              LDR      r0,|L1.912|
+000172  6800              LDR      r0,[r0,#0]  ; Flagbits
+000174  f4205000          BIC      r0,r0,#0x2000
+000178  f5005000          ADD      r0,r0,#0x2000
+00017c  4984              LDR      r1,|L1.912|
+00017e  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;74     		if((motor_ss1 >= Given_Fre1.word)||(M_ss_cnt1 >= SOFT_FRE_START_NUM1))
-000174  48a3              LDR      r0,|L1.1028|
-000176  8800              LDRH     r0,[r0,#0]  ; Given_Fre1
-000178  49a0              LDR      r1,|L1.1020|
-00017a  8809              LDRH     r1,[r1,#0]  ; motor_ss1
-00017c  4288              CMP      r0,r1
-00017e  dd03              BLE      |L1.392|
-000180  489d              LDR      r0,|L1.1016|
-000182  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
-000184  283c              CMP      r0,#0x3c
-000186  db09              BLT      |L1.412|
-                  |L1.392|
+000180  488f              LDR      r0,|L1.960|
+000182  8800              LDRH     r0,[r0,#0]  ; Given_Fre1
+000184  498c              LDR      r1,|L1.952|
+000186  8809              LDRH     r1,[r1,#0]  ; motor_ss1
+000188  4288              CMP      r0,r1
+00018a  dd04              BLE      |L1.406|
+00018c  4889              LDR      r0,|L1.948|
+00018e  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
+000190  f5b07f96          CMP      r0,#0x12c
+000194  db09              BLT      |L1.426|
+                  |L1.406|
 ;;;75     		{
 ;;;76     			motor_ss1 = Given_Fre1.word;
-000188  489e              LDR      r0,|L1.1028|
-00018a  8800              LDRH     r0,[r0,#0]  ; Given_Fre1
-00018c  499b              LDR      r1,|L1.1020|
-00018e  8008              STRH     r0,[r1,#0]
+000196  488a              LDR      r0,|L1.960|
+000198  8800              LDRH     r0,[r0,#0]  ; Given_Fre1
+00019a  4987              LDR      r1,|L1.952|
+00019c  8008              STRH     r0,[r1,#0]
 ;;;77     			M_SS_Fre_start1 = 0;
-000190  4892              LDR      r0,|L1.988|
-000192  6800              LDR      r0,[r0,#0]  ; Flagbits
-000194  f4204080          BIC      r0,r0,#0x4000
-000198  4990              LDR      r1,|L1.988|
-00019a  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.412|
+00019e  487c              LDR      r0,|L1.912|
+0001a0  6800              LDR      r0,[r0,#0]  ; Flagbits
+0001a2  f4204080          BIC      r0,r0,#0x4000
+0001a6  497a              LDR      r1,|L1.912|
+0001a8  6008              STR      r0,[r1,#0]  ; Flagbits
+                  |L1.426|
 ;;;78     		}	
 ;;;79     	}//电机 1 软停止阶段
 ;;;80     	if((M_SS_Fre_stop1 == 1)&&(M_ss_cnt1 > 0)&&\
-00019c  488f              LDR      r0,|L1.988|
-00019e  8800              LDRH     r0,[r0,#0]  ; Flagbits
-0001a0  f3c030c0          UBFX     r0,r0,#15,#1
-0001a4  b388              CBZ      r0,|L1.522|
-0001a6  4894              LDR      r0,|L1.1016|
-0001a8  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
-0001aa  2800              CMP      r0,#0
-0001ac  dd2d              BLE      |L1.522|
+0001aa  4879              LDR      r0,|L1.912|
+0001ac  8800              LDRH     r0,[r0,#0]  ; Flagbits
+0001ae  f3c030c0          UBFX     r0,r0,#15,#1
+0001b2  b360              CBZ      r0,|L1.526|
+0001b4  487f              LDR      r0,|L1.948|
+0001b6  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
+0001b8  2800              CMP      r0,#0
+0001ba  dd28              BLE      |L1.526|
 ;;;81     		(Timer2_cnt % SOFT_FRE_STOP_TIME1 == 0))
-0001ae  4890              LDR      r0,|L1.1008|
-0001b0  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-0001b2  2105              MOVS     r1,#5
-0001b4  fb90f2f1          SDIV     r2,r0,r1
-0001b8  fb010012          MLS      r0,r1,r2,r0
-0001bc  bb28              CBNZ     r0,|L1.522|
+0001bc  2000              MOVS     r0,#0
+0001be  4280              CMP      r0,r0
+0001c0  d125              BNE      |L1.526|
 ;;;82     	{
 ;;;83     		motor_ss1 = motor_ss1 - Fre_Fuzhi12;
-0001be  488f              LDR      r0,|L1.1020|
-0001c0  8800              LDRH     r0,[r0,#0]  ; motor_ss1
-0001c2  4991              LDR      r1,|L1.1032|
-0001c4  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi12
-0001c6  1a40              SUBS     r0,r0,r1
-0001c8  498c              LDR      r1,|L1.1020|
-0001ca  8008              STRH     r0,[r1,#0]
+0001c2  487d              LDR      r0,|L1.952|
+0001c4  8800              LDRH     r0,[r0,#0]  ; motor_ss1
+0001c6  497f              LDR      r1,|L1.964|
+0001c8  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi12
+0001ca  1a40              SUBS     r0,r0,r1
+0001cc  497a              LDR      r1,|L1.952|
+0001ce  8008              STRH     r0,[r1,#0]
 ;;;84     		Timer_Send_Fre1 = 1;
-0001cc  4883              LDR      r0,|L1.988|
-0001ce  6800              LDR      r0,[r0,#0]  ; Flagbits
-0001d0  f4205000          BIC      r0,r0,#0x2000
-0001d4  f5005000          ADD      r0,r0,#0x2000
-0001d8  4980              LDR      r1,|L1.988|
-0001da  6008              STR      r0,[r1,#0]  ; Flagbits
+0001d0  486f              LDR      r0,|L1.912|
+0001d2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0001d4  f4205000          BIC      r0,r0,#0x2000
+0001d8  f5005000          ADD      r0,r0,#0x2000
+0001dc  496c              LDR      r1,|L1.912|
+0001de  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;85     		M_ss_cnt1 --;
-0001dc  4886              LDR      r0,|L1.1016|
-0001de  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
-0001e0  1e40              SUBS     r0,r0,#1
-0001e2  4985              LDR      r1,|L1.1016|
-0001e4  8008              STRH     r0,[r1,#0]
+0001e0  4874              LDR      r0,|L1.948|
+0001e2  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt1
+0001e4  1e40              SUBS     r0,r0,#1
+0001e6  4973              LDR      r1,|L1.948|
+0001e8  8008              STRH     r0,[r1,#0]
 ;;;86     		if(motor_ss1 < SOFT_FRE_STOP_MIN1)
-0001e6  4885              LDR      r0,|L1.1020|
-0001e8  8800              LDRH     r0,[r0,#0]  ; motor_ss1
-0001ea  f5b07fc8          CMP      r0,#0x190
-0001ee  da0c              BGE      |L1.522|
+0001ea  4873              LDR      r0,|L1.952|
+0001ec  8800              LDRH     r0,[r0,#0]  ; motor_ss1
+0001ee  f5b07f7a          CMP      r0,#0x3e8
+0001f2  da0c              BGE      |L1.526|
 ;;;87     		{
 ;;;88     			motor_ss1 = SOFT_FRE_STOP_MIN1;
-0001f0  f44f70c8          MOV      r0,#0x190
-0001f4  4981              LDR      r1,|L1.1020|
-0001f6  8008              STRH     r0,[r1,#0]
+0001f4  f44f707a          MOV      r0,#0x3e8
+0001f8  496f              LDR      r1,|L1.952|
+0001fa  8008              STRH     r0,[r1,#0]
 ;;;89     			M_SS_Fre_stop1 = 0;	
-0001f8  4878              LDR      r0,|L1.988|
-0001fa  6800              LDR      r0,[r0,#0]  ; Flagbits
-0001fc  f4204000          BIC      r0,r0,#0x8000
-000200  4976              LDR      r1,|L1.988|
-000202  6008              STR      r0,[r1,#0]  ; Flagbits
+0001fc  4864              LDR      r0,|L1.912|
+0001fe  6800              LDR      r0,[r0,#0]  ; Flagbits
+000200  f4204000          BIC      r0,r0,#0x8000
+000204  4962              LDR      r1,|L1.912|
+000206  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;90     			M_ss_cnt1 = 0;
-000204  2000              MOVS     r0,#0
-000206  497c              LDR      r1,|L1.1016|
-000208  8008              STRH     r0,[r1,#0]
-                  |L1.522|
+000208  2000              MOVS     r0,#0
+00020a  496a              LDR      r1,|L1.948|
+00020c  8008              STRH     r0,[r1,#0]
+                  |L1.526|
 ;;;91     		}		
 ;;;92     	}//电机 2 软启动阶段
 ;;;93     	if((M_SS_Fre_start2 == 1)&&(M_ss_cnt2 < SOFT_FRE_START_NUM2)&&\
-00020a  4874              LDR      r0,|L1.988|
-00020c  6800              LDR      r0,[r0,#0]  ; Flagbits
-00020e  f3c04040          UBFX     r0,r0,#17,#1
-000212  b398              CBZ      r0,|L1.636|
-000214  487d              LDR      r0,|L1.1036|
-000216  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
-000218  283c              CMP      r0,#0x3c
-00021a  da2f              BGE      |L1.636|
+00020e  4860              LDR      r0,|L1.912|
+000210  6800              LDR      r0,[r0,#0]  ; Flagbits
+000212  f3c04040          UBFX     r0,r0,#17,#1
+000216  b380              CBZ      r0,|L1.634|
+000218  486b              LDR      r0,|L1.968|
+00021a  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
+00021c  f5b07f96          CMP      r0,#0x12c
+000220  da2b              BGE      |L1.634|
 ;;;94     		(Timer2_cnt % SOFT_FRE_START_TIME2 == 0))
-00021c  4874              LDR      r0,|L1.1008|
-00021e  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-000220  2105              MOVS     r1,#5
-000222  fb90f2f1          SDIV     r2,r0,r1
-000226  fb010012          MLS      r0,r1,r2,r0
-00022a  bb38              CBNZ     r0,|L1.636|
+000222  2000              MOVS     r0,#0
+000224  4280              CMP      r0,r0
+000226  d128              BNE      |L1.634|
 ;;;95     	{
 ;;;96     		motor_ss2 = motor_ss2 +  Fre_Fuzhi21;
-00022c  4878              LDR      r0,|L1.1040|
-00022e  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-000230  4978              LDR      r1,|L1.1044|
-000232  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi21
-000234  4408              ADD      r0,r0,r1
-000236  4976              LDR      r1,|L1.1040|
-000238  8008              STRH     r0,[r1,#0]
+000228  4868              LDR      r0,|L1.972|
+00022a  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+00022c  4968              LDR      r1,|L1.976|
+00022e  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi21
+000230  4408              ADD      r0,r0,r1
+000232  4966              LDR      r1,|L1.972|
+000234  8008              STRH     r0,[r1,#0]
 ;;;97     		M_ss_cnt2 ++;
-00023a  4874              LDR      r0,|L1.1036|
-00023c  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
-00023e  1c40              ADDS     r0,r0,#1
-000240  4972              LDR      r1,|L1.1036|
-000242  8008              STRH     r0,[r1,#0]
+000236  4864              LDR      r0,|L1.968|
+000238  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
+00023a  1c40              ADDS     r0,r0,#1
+00023c  4962              LDR      r1,|L1.968|
+00023e  8008              STRH     r0,[r1,#0]
 ;;;98     		Timer_Send_Fre2 = 1;
-000244  4865              LDR      r0,|L1.988|
-000246  6800              LDR      r0,[r0,#0]  ; Flagbits
-000248  f4203080          BIC      r0,r0,#0x10000
-00024c  f5003080          ADD      r0,r0,#0x10000
-000250  4962              LDR      r1,|L1.988|
-000252  6008              STR      r0,[r1,#0]  ; Flagbits
+000240  4853              LDR      r0,|L1.912|
+000242  6800              LDR      r0,[r0,#0]  ; Flagbits
+000244  f4203080          BIC      r0,r0,#0x10000
+000248  f5003080          ADD      r0,r0,#0x10000
+00024c  4950              LDR      r1,|L1.912|
+00024e  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;99     		if((motor_ss2 >= Given_Fre2.word)||(M_ss_cnt2 >= SOFT_FRE_START_NUM2))
-000254  4870              LDR      r0,|L1.1048|
-000256  8800              LDRH     r0,[r0,#0]  ; Given_Fre2
-000258  496d              LDR      r1,|L1.1040|
-00025a  8809              LDRH     r1,[r1,#0]  ; motor_ss2
-00025c  4288              CMP      r0,r1
-00025e  dd03              BLE      |L1.616|
-000260  486a              LDR      r0,|L1.1036|
-000262  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
-000264  283c              CMP      r0,#0x3c
-000266  db09              BLT      |L1.636|
-                  |L1.616|
+000250  4860              LDR      r0,|L1.980|
+000252  8800              LDRH     r0,[r0,#0]  ; Given_Fre2
+000254  495d              LDR      r1,|L1.972|
+000256  8809              LDRH     r1,[r1,#0]  ; motor_ss2
+000258  4288              CMP      r0,r1
+00025a  dd04              BLE      |L1.614|
+00025c  485a              LDR      r0,|L1.968|
+00025e  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
+000260  f5b07f96          CMP      r0,#0x12c
+000264  db09              BLT      |L1.634|
+                  |L1.614|
 ;;;100    		{
 ;;;101    			motor_ss2 = Given_Fre2.word ;
-000268  486b              LDR      r0,|L1.1048|
-00026a  8800              LDRH     r0,[r0,#0]  ; Given_Fre2
-00026c  4968              LDR      r1,|L1.1040|
-00026e  8008              STRH     r0,[r1,#0]
+000266  485b              LDR      r0,|L1.980|
+000268  8800              LDRH     r0,[r0,#0]  ; Given_Fre2
+00026a  4958              LDR      r1,|L1.972|
+00026c  8008              STRH     r0,[r1,#0]
 ;;;102    			M_SS_Fre_start2 = 0;
-000270  485a              LDR      r0,|L1.988|
-000272  6800              LDR      r0,[r0,#0]  ; Flagbits
-000274  f4203000          BIC      r0,r0,#0x20000
-000278  4958              LDR      r1,|L1.988|
-00027a  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.636|
+00026e  4848              LDR      r0,|L1.912|
+000270  6800              LDR      r0,[r0,#0]  ; Flagbits
+000272  f4203000          BIC      r0,r0,#0x20000
+000276  4946              LDR      r1,|L1.912|
+000278  6008              STR      r0,[r1,#0]  ; Flagbits
+                  |L1.634|
 ;;;103    		}
 ;;;104    	}//电机 2 软停止阶段
 ;;;105    	if((M_SS_Fre_stop2 == 1)&&(M_ss_cnt2 > 0)&&\
-00027c  4857              LDR      r0,|L1.988|
-00027e  6800              LDR      r0,[r0,#0]  ; Flagbits
-000280  f3c04080          UBFX     r0,r0,#18,#1
-000284  b388              CBZ      r0,|L1.746|
-000286  4861              LDR      r0,|L1.1036|
-000288  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
-00028a  2800              CMP      r0,#0
-00028c  dd2d              BLE      |L1.746|
+00027a  4845              LDR      r0,|L1.912|
+00027c  6800              LDR      r0,[r0,#0]  ; Flagbits
+00027e  f3c04080          UBFX     r0,r0,#18,#1
+000282  b360              CBZ      r0,|L1.734|
+000284  4850              LDR      r0,|L1.968|
+000286  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
+000288  2800              CMP      r0,#0
+00028a  dd28              BLE      |L1.734|
 ;;;106    		(Timer2_cnt % SOFT_FRE_STOP_TIME2 == 0))
-00028e  4858              LDR      r0,|L1.1008|
-000290  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-000292  2105              MOVS     r1,#5
-000294  fb90f2f1          SDIV     r2,r0,r1
-000298  fb010012          MLS      r0,r1,r2,r0
-00029c  bb28              CBNZ     r0,|L1.746|
+00028c  2000              MOVS     r0,#0
+00028e  4280              CMP      r0,r0
+000290  d125              BNE      |L1.734|
 ;;;107    	{
 ;;;108    		motor_ss2 = motor_ss2 - Fre_Fuzhi22;
-00029e  485c              LDR      r0,|L1.1040|
-0002a0  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-0002a2  495e              LDR      r1,|L1.1052|
-0002a4  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi22
-0002a6  1a40              SUBS     r0,r0,r1
-0002a8  4959              LDR      r1,|L1.1040|
-0002aa  8008              STRH     r0,[r1,#0]
+000292  484e              LDR      r0,|L1.972|
+000294  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+000296  4950              LDR      r1,|L1.984|
+000298  8809              LDRH     r1,[r1,#0]  ; Fre_Fuzhi22
+00029a  1a40              SUBS     r0,r0,r1
+00029c  494b              LDR      r1,|L1.972|
+00029e  8008              STRH     r0,[r1,#0]
 ;;;109    		Timer_Send_Fre2 = 1;
-0002ac  484b              LDR      r0,|L1.988|
-0002ae  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002b0  f4203080          BIC      r0,r0,#0x10000
-0002b4  f5003080          ADD      r0,r0,#0x10000
-0002b8  4948              LDR      r1,|L1.988|
-0002ba  6008              STR      r0,[r1,#0]  ; Flagbits
+0002a0  483b              LDR      r0,|L1.912|
+0002a2  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002a4  f4203080          BIC      r0,r0,#0x10000
+0002a8  f5003080          ADD      r0,r0,#0x10000
+0002ac  4938              LDR      r1,|L1.912|
+0002ae  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;110    		M_ss_cnt2 --;
-0002bc  4853              LDR      r0,|L1.1036|
-0002be  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
-0002c0  1e40              SUBS     r0,r0,#1
-0002c2  4952              LDR      r1,|L1.1036|
-0002c4  8008              STRH     r0,[r1,#0]
+0002b0  4845              LDR      r0,|L1.968|
+0002b2  8800              LDRH     r0,[r0,#0]  ; M_ss_cnt2
+0002b4  1e40              SUBS     r0,r0,#1
+0002b6  4944              LDR      r1,|L1.968|
+0002b8  8008              STRH     r0,[r1,#0]
 ;;;111    		if(motor_ss2 < SOFT_FRE_STOP_MIN2)
-0002c6  4852              LDR      r0,|L1.1040|
-0002c8  8800              LDRH     r0,[r0,#0]  ; motor_ss2
-0002ca  f5b07fc8          CMP      r0,#0x190
-0002ce  da0c              BGE      |L1.746|
+0002ba  4844              LDR      r0,|L1.972|
+0002bc  8800              LDRH     r0,[r0,#0]  ; motor_ss2
+0002be  f5b07f7a          CMP      r0,#0x3e8
+0002c2  da0c              BGE      |L1.734|
 ;;;112    		{
 ;;;113    			motor_ss2 = SOFT_FRE_STOP_MIN2;
-0002d0  f44f70c8          MOV      r0,#0x190
-0002d4  494e              LDR      r1,|L1.1040|
-0002d6  8008              STRH     r0,[r1,#0]
+0002c4  f44f707a          MOV      r0,#0x3e8
+0002c8  4940              LDR      r1,|L1.972|
+0002ca  8008              STRH     r0,[r1,#0]
 ;;;114    			M_SS_Fre_stop2 = 0;	
-0002d8  4840              LDR      r0,|L1.988|
-0002da  6800              LDR      r0,[r0,#0]  ; Flagbits
-0002dc  f4202080          BIC      r0,r0,#0x40000
-0002e0  493e              LDR      r1,|L1.988|
-0002e2  6008              STR      r0,[r1,#0]  ; Flagbits
+0002cc  4830              LDR      r0,|L1.912|
+0002ce  6800              LDR      r0,[r0,#0]  ; Flagbits
+0002d0  f4202080          BIC      r0,r0,#0x40000
+0002d4  492e              LDR      r1,|L1.912|
+0002d6  6008              STR      r0,[r1,#0]  ; Flagbits
 ;;;115    			M_ss_cnt2 = 0;
-0002e4  2000              MOVS     r0,#0
-0002e6  4949              LDR      r1,|L1.1036|
-0002e8  8008              STRH     r0,[r1,#0]
-                  |L1.746|
+0002d8  2000              MOVS     r0,#0
+0002da  493b              LDR      r1,|L1.968|
+0002dc  8008              STRH     r0,[r1,#0]
+                  |L1.734|
 ;;;116    		}		
 ;;;117    	}
 ;;;118    	if(Timer2_cnt%500 == 0)       //1s
-0002ea  4841              LDR      r0,|L1.1008|
-0002ec  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-0002ee  f44f71fa          MOV      r1,#0x1f4
-0002f2  fb90f2f1          SDIV     r2,r0,r1
-0002f6  fb010012          MLS      r0,r1,r2,r0
-0002fa  2800              CMP      r0,#0
-0002fc  d14a              BNE      |L1.916|
+0002de  4833              LDR      r0,|L1.940|
+0002e0  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
+0002e2  f44f71fa          MOV      r1,#0x1f4
+0002e6  fb90f2f1          SDIV     r2,r0,r1
+0002ea  fb010012          MLS      r0,r1,r2,r0
+0002ee  2800              CMP      r0,#0
+0002f0  d14a              BNE      |L1.904|
 ;;;119    	{
 ;;;120    		//发送状态信息
 ;;;121    		if((Cmd_55_Flag == 0) && (start_cnt < 20))
-0002fe  4837              LDR      r0,|L1.988|
-000300  8800              LDRH     r0,[r0,#0]  ; Flagbits
-000302  f3c02080          UBFX     r0,r0,#10,#1
-000306  bb08              CBNZ     r0,|L1.844|
-000308  4845              LDR      r0,|L1.1056|
-00030a  7800              LDRB     r0,[r0,#0]  ; start_cnt
-00030c  2814              CMP      r0,#0x14
-00030e  da1d              BGE      |L1.844|
+0002f2  4827              LDR      r0,|L1.912|
+0002f4  8800              LDRH     r0,[r0,#0]  ; Flagbits
+0002f6  f3c02080          UBFX     r0,r0,#10,#1
+0002fa  bb08              CBNZ     r0,|L1.832|
+0002fc  4837              LDR      r0,|L1.988|
+0002fe  7800              LDRB     r0,[r0,#0]  ; start_cnt
+000300  2814              CMP      r0,#0x14
+000302  da1d              BGE      |L1.832|
 ;;;122    		{
 ;;;123    			can1StartSend[0] = 0x01; 
-000310  2001              MOVS     r0,#1
-000312  4944              LDR      r1,|L1.1060|
-000314  7008              STRB     r0,[r1,#0]
+000304  2001              MOVS     r0,#1
+000306  4936              LDR      r1,|L1.992|
+000308  7008              STRB     r0,[r1,#0]
 ;;;124    			can1StartSend[1] = 0x55;
-000316  2055              MOVS     r0,#0x55
-000318  7048              STRB     r0,[r1,#1]
+00030a  2055              MOVS     r0,#0x55
+00030c  7048              STRB     r0,[r1,#1]
 ;;;125    			can1StartSend[2] = M1_state.byte;
-00031a  4843              LDR      r0,|L1.1064|
-00031c  7800              LDRB     r0,[r0,#0]  ; M1_state
-00031e  7088              STRB     r0,[r1,#2]
+00030e  4835              LDR      r0,|L1.996|
+000310  7800              LDRB     r0,[r0,#0]  ; M1_state
+000312  7088              STRB     r0,[r1,#2]
 ;;;126    			can1StartSend[3] = M2_state.byte;
-000320  4842              LDR      r0,|L1.1068|
-000322  7800              LDRB     r0,[r0,#0]  ; M2_state
-000324  70c8              STRB     r0,[r1,#3]
+000314  4834              LDR      r0,|L1.1000|
+000316  7800              LDRB     r0,[r0,#0]  ; M2_state
+000318  70c8              STRB     r0,[r1,#3]
 ;;;127    			can1StartSend[4] = HARDWAREVERSION;
-000326  2014              MOVS     r0,#0x14
-000328  7108              STRB     r0,[r1,#4]
+00031a  2014              MOVS     r0,#0x14
+00031c  7108              STRB     r0,[r1,#4]
 ;;;128    			can1StartSend[5] = (uint8_t)(SOFTWAREVERSION>>8);
-00032a  2000              MOVS     r0,#0
-00032c  7148              STRB     r0,[r1,#5]
+00031e  2000              MOVS     r0,#0
+000320  7148              STRB     r0,[r1,#5]
 ;;;129    			can1StartSend[6] = (uint8_t)(SOFTWAREVERSION&0x00FF);
-00032e  2014              MOVS     r0,#0x14
-000330  7188              STRB     r0,[r1,#6]
+000322  2014              MOVS     r0,#0x14
+000324  7188              STRB     r0,[r1,#6]
 ;;;130    			can1StartSend[7] = 0x00;						
-000332  2000              MOVS     r0,#0
-000334  71c8              STRB     r0,[r1,#7]
+000326  2000              MOVS     r0,#0
+000328  71c8              STRB     r0,[r1,#7]
 ;;;131    			Can1DatasSend(can1StartSend,8,0x100);
-000336  f44f7280          MOV      r2,#0x100
-00033a  2108              MOVS     r1,#8
-00033c  4839              LDR      r0,|L1.1060|
-00033e  f7fffffe          BL       Can1DatasSend
+00032a  f44f7280          MOV      r2,#0x100
+00032e  2108              MOVS     r1,#8
+000330  482b              LDR      r0,|L1.992|
+000332  f7fffffe          BL       Can1DatasSend
 ;;;132    			start_cnt ++;
-000342  4837              LDR      r0,|L1.1056|
-000344  7800              LDRB     r0,[r0,#0]  ; start_cnt
-000346  1c40              ADDS     r0,r0,#1
-000348  4935              LDR      r1,|L1.1056|
-00034a  7008              STRB     r0,[r1,#0]
-                  |L1.844|
+000336  4829              LDR      r0,|L1.988|
+000338  7800              LDRB     r0,[r0,#0]  ; start_cnt
+00033a  1c40              ADDS     r0,r0,#1
+00033c  4927              LDR      r1,|L1.988|
+00033e  7008              STRB     r0,[r1,#0]
+                  |L1.832|
 ;;;133    		}
 ;;;134    		if(LED_CONTROL)
-00034c  4823              LDR      r0,|L1.988|
-00034e  6800              LDR      r0,[r0,#0]  ; Flagbits
-000350  f3c040c0          UBFX     r0,r0,#19,#1
-000354  b170              CBZ      r0,|L1.884|
+000340  4813              LDR      r0,|L1.912|
+000342  6800              LDR      r0,[r0,#0]  ; Flagbits
+000344  f3c040c0          UBFX     r0,r0,#19,#1
+000348  b170              CBZ      r0,|L1.872|
 ;;;135    		{LED_CONTROL = 0;LED_ON;}	
-000356  4821              LDR      r0,|L1.988|
-000358  6800              LDR      r0,[r0,#0]  ; Flagbits
-00035a  f4202000          BIC      r0,r0,#0x80000
-00035e  491f              LDR      r1,|L1.988|
-000360  6008              STR      r0,[r1,#0]  ; Flagbits
-000362  f04f7080          MOV      r0,#0x1000000
-000366  6a00              LDR      r0,[r0,#0x20]
-000368  2200              MOVS     r2,#0
-00036a  2108              MOVS     r1,#8
-00036c  6803              LDR      r3,[r0,#0]
-00036e  481e              LDR      r0,|L1.1000|
-000370  4798              BLX      r3
-000372  e00f              B        |L1.916|
-                  |L1.884|
+00034a  4811              LDR      r0,|L1.912|
+00034c  6800              LDR      r0,[r0,#0]  ; Flagbits
+00034e  f4202000          BIC      r0,r0,#0x80000
+000352  490f              LDR      r1,|L1.912|
+000354  6008              STR      r0,[r1,#0]  ; Flagbits
+000356  f04f7080          MOV      r0,#0x1000000
+00035a  6a00              LDR      r0,[r0,#0x20]
+00035c  2200              MOVS     r2,#0
+00035e  2108              MOVS     r1,#8
+000360  6803              LDR      r3,[r0,#0]
+000362  480f              LDR      r0,|L1.928|
+000364  4798              BLX      r3
+000366  e00f              B        |L1.904|
+                  |L1.872|
 ;;;136    		else
 ;;;137    		{LED_CONTROL = 1;LED_OFF;}	
-000374  4819              LDR      r0,|L1.988|
-000376  6800              LDR      r0,[r0,#0]  ; Flagbits
-000378  f4202000          BIC      r0,r0,#0x80000
-00037c  f5002000          ADD      r0,r0,#0x80000
-000380  4916              LDR      r1,|L1.988|
-000382  6008              STR      r0,[r1,#0]  ; Flagbits
-000384  f04f7080          MOV      r0,#0x1000000
-000388  6a00              LDR      r0,[r0,#0x20]
-00038a  2208              MOVS     r2,#8
-00038c  4611              MOV      r1,r2
-00038e  6803              LDR      r3,[r0,#0]
-000390  4815              LDR      r0,|L1.1000|
-000392  4798              BLX      r3
-                  |L1.916|
+000368  4809              LDR      r0,|L1.912|
+00036a  6800              LDR      r0,[r0,#0]  ; Flagbits
+00036c  f4202000          BIC      r0,r0,#0x80000
+000370  f5002000          ADD      r0,r0,#0x80000
+000374  4906              LDR      r1,|L1.912|
+000376  6008              STR      r0,[r1,#0]  ; Flagbits
+000378  f04f7080          MOV      r0,#0x1000000
+00037c  6a00              LDR      r0,[r0,#0x20]
+00037e  2208              MOVS     r2,#8
+000380  4611              MOV      r1,r2
+000382  6803              LDR      r3,[r0,#0]
+000384  4806              LDR      r0,|L1.928|
+000386  4798              BLX      r3
+                  |L1.904|
 ;;;138    	}	
-;;;139    	if((Timer2_cnt%20000)==19999)
-000394  4816              LDR      r0,|L1.1008|
-000396  8800              LDRH     r0,[r0,#0]  ; Timer2_cnt
-000398  f6446120          MOV      r1,#0x4e20
-00039c  fb90f2f1          SDIV     r2,r0,r1
-0003a0  fb010012          MLS      r0,r1,r2,r0
-0003a4  f5a0419c          SUB      r1,r0,#0x4e00
-0003a8  391f              SUBS     r1,r1,#0x1f
-0003aa  d113              BNE      |L1.980|
-;;;140    	{
-;;;141    		
-;;;142    		//start_cnt1++;
-;;;143    		if(MOTOR_ISENABLE)
-0003ac  480b              LDR      r0,|L1.988|
-0003ae  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003b0  f3c05000          UBFX     r0,r0,#20,#1
-0003b4  b130              CBZ      r0,|L1.964|
-;;;144    		{
-;;;145    			
-;;;146    			//M1_Disable;
-;;;147    			//M2_Disable;
-;;;148    			//Motor_New_Cmd1   = 0;
-;;;149    			//Motor_New_Cmd2   = 0;
-;;;150    			//Timer1_Disble();      //关闭定时器0，停止脉冲反转
-;;;151    		
-;;;152    			MOTOR_ISENABLE = 0;
-0003b6  4809              LDR      r0,|L1.988|
-0003b8  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003ba  f4201080          BIC      r0,r0,#0x100000
-0003be  4907              LDR      r1,|L1.988|
-0003c0  6008              STR      r0,[r1,#0]  ; Flagbits
-0003c2  e007              B        |L1.980|
-                  |L1.964|
-;;;153    		}
-;;;154    		else
-;;;155    		{
-;;;156    //			M1_Enable;
-;;;157    //			M2_Enable;
-;;;158    //			Motor_New_Cmd1   = 1;
-;;;159    //		//	Motor_New_Cmd2   = 0;
-;;;160    //			TimerLoadSet(TIMER0_BASE, TIMER_A,ROM_SysCtlClockGet()/1000);
-;;;161    //			TimerLoadSet(TIMER1_BASE, TIMER_A,ROM_SysCtlClockGet()/1000);
-;;;162    //			//Timer1_Enable();      //关闭定时器0，停止脉冲反转
-;;;163    //			
-;;;164    			MOTOR_ISENABLE = 1;
-0003c4  4805              LDR      r0,|L1.988|
-0003c6  6800              LDR      r0,[r0,#0]  ; Flagbits
-0003c8  f4201080          BIC      r0,r0,#0x100000
-0003cc  f5001080          ADD      r0,r0,#0x100000
-0003d0  4902              LDR      r1,|L1.988|
-0003d2  6008              STR      r0,[r1,#0]  ; Flagbits
-                  |L1.980|
-;;;165    		}
-;;;166    	}
-;;;167    }   
-0003d4  bd10              POP      {r4,pc}
-;;;168    
+;;;139    }   
+000388  bd10              POP      {r4,pc}
+;;;140    
                           ENDP
 
-0003d6  0000              DCW      0x0000
-                  |L1.984|
+00038a  0000              DCW      0x0000
+                  |L1.908|
                           DCD      0x40030000
-                  |L1.988|
+                  |L1.912|
                           DCD      Flagbits
-                  |L1.992|
+                  |L1.916|
                           DCD      0x40005000
-                  |L1.996|
+                  |L1.920|
+                          DCD      Step_Num_Cur1
+                  |L1.924|
                           DCD      0x40031000
-                  |L1.1000|
+                  |L1.928|
                           DCD      0x40007000
-                  |L1.1004|
+                  |L1.932|
+                          DCD      Step_Num_Cur2
+                  |L1.936|
                           DCD      0x40032000
-                  |L1.1008|
+                  |L1.940|
                           DCD      Timer2_cnt
-                  |L1.1012|
+                  |L1.944|
                           DCD      0x40006000
-                  |L1.1016|
+                  |L1.948|
                           DCD      M_ss_cnt1
-                  |L1.1020|
+                  |L1.952|
                           DCD      motor_ss1
-                  |L1.1024|
+                  |L1.956|
                           DCD      Fre_Fuzhi11
-                  |L1.1028|
+                  |L1.960|
                           DCD      Given_Fre1
-                  |L1.1032|
+                  |L1.964|
                           DCD      Fre_Fuzhi12
-                  |L1.1036|
+                  |L1.968|
                           DCD      M_ss_cnt2
-                  |L1.1040|
+                  |L1.972|
                           DCD      motor_ss2
-                  |L1.1044|
+                  |L1.976|
                           DCD      Fre_Fuzhi21
-                  |L1.1048|
+                  |L1.980|
                           DCD      Given_Fre2
-                  |L1.1052|
+                  |L1.984|
                           DCD      Fre_Fuzhi22
-                  |L1.1056|
+                  |L1.988|
                           DCD      start_cnt
-                  |L1.1060|
+                  |L1.992|
                           DCD      can1StartSend
-                  |L1.1064|
+                  |L1.996|
                           DCD      M1_state
-                  |L1.1068|
+                  |L1.1000|
                           DCD      M2_state
 
                           AREA ||.data||, DATA, ALIGN=1

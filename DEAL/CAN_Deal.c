@@ -1,7 +1,7 @@
 #include "AllDeal.h"
  
-#define MOTOR1     0x10    //控制电机 1 的指令
-#define MOTOR2     0x20	   //控制电机 2 的指令
+#define MOTOR1     0x90    //控制电机 1 的指令 腰部电机
+#define MOTOR2     0x30	   //控制电机 2 的指令 偏航电机
 #define INTERFACE  0x00    //胸部接口板
 
 extern CanFifo can1RxFifo;

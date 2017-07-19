@@ -13,47 +13,47 @@
 000002  f04f7080          MOV      r0,#0x1000000
 000006  6c40              LDR      r0,[r0,#0x44]
 000008  6981              LDR      r1,[r0,#0x18]
-00000a  485a              LDR      r0,|L1.372|
+00000a  485b              LDR      r0,|L1.376|
 00000c  4788              BLX      r1
 ;;;6      	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 00000e  f04f7080          MOV      r0,#0x1000000
 000012  6c40              LDR      r0,[r0,#0x44]
 000014  6981              LDR      r1,[r0,#0x18]
-000016  4857              LDR      r0,|L1.372|
+000016  4858              LDR      r0,|L1.376|
 000018  1c40              ADDS     r0,r0,#1
 00001a  4788              BLX      r1
 ;;;7      	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
 00001c  f04f7080          MOV      r0,#0x1000000
 000020  6c40              LDR      r0,[r0,#0x44]
 000022  6981              LDR      r1,[r0,#0x18]
-000024  4853              LDR      r0,|L1.372|
+000024  4854              LDR      r0,|L1.376|
 000026  1c80              ADDS     r0,r0,#2
 000028  4788              BLX      r1
 ;;;8      	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 00002a  f04f7080          MOV      r0,#0x1000000
 00002e  6c40              LDR      r0,[r0,#0x44]
 000030  6981              LDR      r1,[r0,#0x18]
-000032  4850              LDR      r0,|L1.372|
+000032  4851              LDR      r0,|L1.376|
 000034  1cc0              ADDS     r0,r0,#3
 000036  4788              BLX      r1
 ;;;9      	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
 000038  f04f7080          MOV      r0,#0x1000000
 00003c  6c40              LDR      r0,[r0,#0x44]
 00003e  6981              LDR      r1,[r0,#0x18]
-000040  484c              LDR      r0,|L1.372|
+000040  484d              LDR      r0,|L1.376|
 000042  1d00              ADDS     r0,r0,#4
 000044  4788              BLX      r1
 ;;;10     	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 000046  f04f7080          MOV      r0,#0x1000000
 00004a  6c40              LDR      r0,[r0,#0x44]
 00004c  6981              LDR      r1,[r0,#0x18]
-00004e  4849              LDR      r0,|L1.372|
+00004e  484a              LDR      r0,|L1.376|
 000050  1d40              ADDS     r0,r0,#5
 000052  4788              BLX      r1
 ;;;11     	
 ;;;12     	HWREG(GPIO_PORTD_BASE  + GPIO_O_LOCK) = GPIO_LOCK_KEY;
-000054  4848              LDR      r0,|L1.376|
-000056  4949              LDR      r1,|L1.380|
+000054  4849              LDR      r0,|L1.380|
+000056  494a              LDR      r1,|L1.384|
 000058  6008              STR      r0,[r1,#0]
 ;;;13     	HWREG(GPIO_PORTD_BASE  + GPIO_O_CR) |= 0x80;				
 00005a  1d08              ADDS     r0,r1,#4
@@ -63,165 +63,164 @@
 000064  6008              STR      r0,[r1,#0]
 ;;;14     
 ;;;15     //  级联限位开关
-;;;16     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_7);//M1_Limit1
+;;;16     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_7);//M1_Limit1
+;;;17     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_3);//M1_limit2	
+;;;18     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_2);//M2_Limit1
+;;;19     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_1);//M2_Limit2
+;;;20     	
+;;;21     //  板载限位
+;;;22     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_3);//M1_Limit1
 000066  f04f7080          MOV      r0,#0x1000000
 00006a  6a00              LDR      r0,[r0,#0x20]
-00006c  2180              MOVS     r1,#0x80
+00006c  2108              MOVS     r1,#8
 00006e  6b82              LDR      r2,[r0,#0x38]
 000070  f04f2040          MOV      r0,#0x40004000
 000074  4790              BLX      r2
-;;;17     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_3);//M1_limit2	
+;;;23     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_4);//M1_limit2	
 000076  f04f7080          MOV      r0,#0x1000000
 00007a  6a00              LDR      r0,[r0,#0x20]
-00007c  2108              MOVS     r1,#8
+00007c  2110              MOVS     r1,#0x10
 00007e  6b82              LDR      r2,[r0,#0x38]
-000080  483f              LDR      r0,|L1.384|
-000082  4790              BLX      r2
-;;;18     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_2);//M2_Limit1
-000084  f04f7080          MOV      r0,#0x1000000
-000088  6a00              LDR      r0,[r0,#0x20]
-00008a  2104              MOVS     r1,#4
-00008c  6b82              LDR      r2,[r0,#0x38]
-00008e  483c              LDR      r0,|L1.384|
-000090  4790              BLX      r2
-;;;19     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_1);//M2_Limit2
-000092  f04f7080          MOV      r0,#0x1000000
-000096  6a00              LDR      r0,[r0,#0x20]
-000098  2102              MOVS     r1,#2
-00009a  6b82              LDR      r2,[r0,#0x38]
-00009c  4838              LDR      r0,|L1.384|
-00009e  4790              BLX      r2
-;;;20     	
-;;;21     //  板载限位
-;;;22     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_3);//M1_Limit1
-;;;23     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_4);//M1_limit2	
-;;;24     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_6);//M2_Limit1
-;;;25     //	ROM_GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_7);//M2_Limit2
+000080  f04f2040          MOV      r0,#0x40004000
+000084  4790              BLX      r2
+;;;24     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_6);//M2_Limit1
+000086  f04f7080          MOV      r0,#0x1000000
+00008a  6a00              LDR      r0,[r0,#0x20]
+00008c  2140              MOVS     r1,#0x40
+00008e  6b82              LDR      r2,[r0,#0x38]
+000090  483c              LDR      r0,|L1.388|
+000092  4790              BLX      r2
+;;;25     	ROM_GPIOPinTypeGPIOInput(GPIO_PORTC_BASE, GPIO_PIN_7);//M2_Limit2
+000094  f04f7080          MOV      r0,#0x1000000
+000098  6a00              LDR      r0,[r0,#0x20]
+00009a  2180              MOVS     r1,#0x80
+00009c  6b82              LDR      r2,[r0,#0x38]
+00009e  4839              LDR      r0,|L1.388|
+0000a0  4790              BLX      r2
 ;;;26     	
 ;;;27     	
 ;;;28     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTC_BASE, GPIO_PIN_4);//DIR1
-0000a0  f04f7080          MOV      r0,#0x1000000
-0000a4  6a00              LDR      r0,[r0,#0x20]
-0000a6  2110              MOVS     r1,#0x10
-0000a8  6bc2              LDR      r2,[r0,#0x3c]
-0000aa  4836              LDR      r0,|L1.388|
-0000ac  4790              BLX      r2
+0000a2  f04f7080          MOV      r0,#0x1000000
+0000a6  6a00              LDR      r0,[r0,#0x20]
+0000a8  2110              MOVS     r1,#0x10
+0000aa  6bc2              LDR      r2,[r0,#0x3c]
+0000ac  4835              LDR      r0,|L1.388|
+0000ae  4790              BLX      r2
 ;;;29     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTC_BASE, GPIO_PIN_5);//EN1
-0000ae  f04f7080          MOV      r0,#0x1000000
-0000b2  6a00              LDR      r0,[r0,#0x20]
-0000b4  2120              MOVS     r1,#0x20
-0000b6  6bc2              LDR      r2,[r0,#0x3c]
-0000b8  4832              LDR      r0,|L1.388|
-0000ba  4790              BLX      r2
+0000b0  f04f7080          MOV      r0,#0x1000000
+0000b4  6a00              LDR      r0,[r0,#0x20]
+0000b6  2120              MOVS     r1,#0x20
+0000b8  6bc2              LDR      r2,[r0,#0x3c]
+0000ba  4832              LDR      r0,|L1.388|
+0000bc  4790              BLX      r2
 ;;;30     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_7);//PULSE1
-0000bc  f04f7080          MOV      r0,#0x1000000
-0000c0  6a00              LDR      r0,[r0,#0x20]
-0000c2  2180              MOVS     r1,#0x80
-0000c4  6bc2              LDR      r2,[r0,#0x3c]
-0000c6  4830              LDR      r0,|L1.392|
-0000c8  4790              BLX      r2
+0000be  f04f7080          MOV      r0,#0x1000000
+0000c2  6a00              LDR      r0,[r0,#0x20]
+0000c4  2180              MOVS     r1,#0x80
+0000c6  6bc2              LDR      r2,[r0,#0x3c]
+0000c8  482f              LDR      r0,|L1.392|
+0000ca  4790              BLX      r2
 ;;;31     	
 ;;;32     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_2);//DIR2
-0000ca  f04f7080          MOV      r0,#0x1000000
-0000ce  6a00              LDR      r0,[r0,#0x20]
-0000d0  2104              MOVS     r1,#4
-0000d2  6bc2              LDR      r2,[r0,#0x3c]
-0000d4  482d              LDR      r0,|L1.396|
-0000d6  4790              BLX      r2
+0000cc  f04f7080          MOV      r0,#0x1000000
+0000d0  6a00              LDR      r0,[r0,#0x20]
+0000d2  2104              MOVS     r1,#4
+0000d4  6bc2              LDR      r2,[r0,#0x3c]
+0000d6  482d              LDR      r0,|L1.396|
+0000d8  4790              BLX      r2
 ;;;33     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_0);//EN2
-0000d8  f04f7080          MOV      r0,#0x1000000
-0000dc  6a00              LDR      r0,[r0,#0x20]
-0000de  2101              MOVS     r1,#1
-0000e0  6bc2              LDR      r2,[r0,#0x3c]
-0000e2  482a              LDR      r0,|L1.396|
-0000e4  4790              BLX      r2
+0000da  f04f7080          MOV      r0,#0x1000000
+0000de  6a00              LDR      r0,[r0,#0x20]
+0000e0  2101              MOVS     r1,#1
+0000e2  6bc2              LDR      r2,[r0,#0x3c]
+0000e4  4829              LDR      r0,|L1.396|
+0000e6  4790              BLX      r2
 ;;;34     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_1);//PULSE2	
-0000e6  f04f7080          MOV      r0,#0x1000000
-0000ea  6a00              LDR      r0,[r0,#0x20]
-0000ec  2102              MOVS     r1,#2
-0000ee  6bc2              LDR      r2,[r0,#0x3c]
-0000f0  4826              LDR      r0,|L1.396|
-0000f2  4790              BLX      r2
+0000e8  f04f7080          MOV      r0,#0x1000000
+0000ec  6a00              LDR      r0,[r0,#0x20]
+0000ee  2102              MOVS     r1,#2
+0000f0  6bc2              LDR      r2,[r0,#0x3c]
+0000f2  4826              LDR      r0,|L1.396|
+0000f4  4790              BLX      r2
 ;;;35     
 ;;;36     	ROM_GPIOPinTypeGPIOOutput(GPIO_PORTD_BASE, GPIO_PIN_3);//LED test
-0000f4  f04f7080          MOV      r0,#0x1000000
-0000f8  6a00              LDR      r0,[r0,#0x20]
-0000fa  2108              MOVS     r1,#8
-0000fc  6bc2              LDR      r2,[r0,#0x3c]
-0000fe  4823              LDR      r0,|L1.396|
-000100  4790              BLX      r2
+0000f6  f04f7080          MOV      r0,#0x1000000
+0000fa  6a00              LDR      r0,[r0,#0x20]
+0000fc  2108              MOVS     r1,#8
+0000fe  6bc2              LDR      r2,[r0,#0x3c]
+000100  4822              LDR      r0,|L1.396|
+000102  4790              BLX      r2
 ;;;37     	
 ;;;38     	M1_Dir_Forward;		//方向		
-000102  f04f7080          MOV      r0,#0x1000000
-000106  6a00              LDR      r0,[r0,#0x20]
-000108  2210              MOVS     r2,#0x10
-00010a  4611              MOV      r1,r2
-00010c  6803              LDR      r3,[r0,#0]
-00010e  481d              LDR      r0,|L1.388|
-000110  4798              BLX      r3
+000104  f04f7080          MOV      r0,#0x1000000
+000108  6a00              LDR      r0,[r0,#0x20]
+00010a  2210              MOVS     r2,#0x10
+00010c  4611              MOV      r1,r2
+00010e  6803              LDR      r3,[r0,#0]
+000110  481c              LDR      r0,|L1.388|
+000112  4798              BLX      r3
 ;;;39     	M1_Disable;
-000112  f04f7080          MOV      r0,#0x1000000
-000116  6a00              LDR      r0,[r0,#0x20]
-000118  2220              MOVS     r2,#0x20
-00011a  4611              MOV      r1,r2
-00011c  6803              LDR      r3,[r0,#0]
-00011e  4819              LDR      r0,|L1.388|
-000120  4798              BLX      r3
+000114  f04f7080          MOV      r0,#0x1000000
+000118  6a00              LDR      r0,[r0,#0x20]
+00011a  2220              MOVS     r2,#0x20
+00011c  4611              MOV      r1,r2
+00011e  6803              LDR      r3,[r0,#0]
+000120  4818              LDR      r0,|L1.388|
+000122  4798              BLX      r3
 ;;;40     	M1_Pulse_High;
-000122  f04f7080          MOV      r0,#0x1000000
-000126  6a00              LDR      r0,[r0,#0x20]
-000128  2280              MOVS     r2,#0x80
-00012a  4611              MOV      r1,r2
-00012c  6803              LDR      r3,[r0,#0]
-00012e  4816              LDR      r0,|L1.392|
-000130  4798              BLX      r3
+000124  f04f7080          MOV      r0,#0x1000000
+000128  6a00              LDR      r0,[r0,#0x20]
+00012a  2280              MOVS     r2,#0x80
+00012c  4611              MOV      r1,r2
+00012e  6803              LDR      r3,[r0,#0]
+000130  4815              LDR      r0,|L1.392|
+000132  4798              BLX      r3
 ;;;41     	
 ;;;42     	M2_Dir_Forward;				
-000132  f04f7080          MOV      r0,#0x1000000
-000136  6a00              LDR      r0,[r0,#0x20]
-000138  2200              MOVS     r2,#0
-00013a  2104              MOVS     r1,#4
-00013c  6803              LDR      r3,[r0,#0]
-00013e  4813              LDR      r0,|L1.396|
-000140  4798              BLX      r3
+000134  f04f7080          MOV      r0,#0x1000000
+000138  6a00              LDR      r0,[r0,#0x20]
+00013a  2200              MOVS     r2,#0
+00013c  2104              MOVS     r1,#4
+00013e  6803              LDR      r3,[r0,#0]
+000140  4812              LDR      r0,|L1.396|
+000142  4798              BLX      r3
 ;;;43     	M2_Disable;
-000142  f04f7080          MOV      r0,#0x1000000
-000146  6a00              LDR      r0,[r0,#0x20]
-000148  2201              MOVS     r2,#1
-00014a  4611              MOV      r1,r2
-00014c  6803              LDR      r3,[r0,#0]
-00014e  480f              LDR      r0,|L1.396|
-000150  4798              BLX      r3
+000144  f04f7080          MOV      r0,#0x1000000
+000148  6a00              LDR      r0,[r0,#0x20]
+00014a  2201              MOVS     r2,#1
+00014c  4611              MOV      r1,r2
+00014e  6803              LDR      r3,[r0,#0]
+000150  480e              LDR      r0,|L1.396|
+000152  4798              BLX      r3
 ;;;44     	M2_Pulse_High;
-000152  f04f7080          MOV      r0,#0x1000000
-000156  6a00              LDR      r0,[r0,#0x20]
-000158  2202              MOVS     r2,#2
-00015a  4611              MOV      r1,r2
-00015c  6803              LDR      r3,[r0,#0]
-00015e  480b              LDR      r0,|L1.396|
-000160  4798              BLX      r3
+000154  f04f7080          MOV      r0,#0x1000000
+000158  6a00              LDR      r0,[r0,#0x20]
+00015a  2202              MOVS     r2,#2
+00015c  4611              MOV      r1,r2
+00015e  6803              LDR      r3,[r0,#0]
+000160  480a              LDR      r0,|L1.396|
+000162  4798              BLX      r3
 ;;;45     	
 ;;;46     	LED_OFF;
-000162  f04f7080          MOV      r0,#0x1000000
-000166  6a00              LDR      r0,[r0,#0x20]
-000168  2208              MOVS     r2,#8
-00016a  4611              MOV      r1,r2
-00016c  6803              LDR      r3,[r0,#0]
-00016e  4807              LDR      r0,|L1.396|
-000170  4798              BLX      r3
+000164  f04f7080          MOV      r0,#0x1000000
+000168  6a00              LDR      r0,[r0,#0x20]
+00016a  2208              MOVS     r2,#8
+00016c  4611              MOV      r1,r2
+00016e  6803              LDR      r3,[r0,#0]
+000170  4806              LDR      r0,|L1.396|
+000172  4798              BLX      r3
 ;;;47     }
-000172  bd10              POP      {r4,pc}
+000174  bd10              POP      {r4,pc}
 ;;;48     
                           ENDP
 
-                  |L1.372|
-                          DCD      0xf0000800
+000176  0000              DCW      0x0000
                   |L1.376|
-                          DCD      0x4c4f434b
+                          DCD      0xf0000800
                   |L1.380|
-                          DCD      0x40007520
+                          DCD      0x4c4f434b
                   |L1.384|
-                          DCD      0x40025000
+                          DCD      0x40007520
                   |L1.388|
                           DCD      0x40006000
                   |L1.392|

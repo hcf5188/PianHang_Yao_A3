@@ -1,6 +1,6 @@
 #include "System_Init.h"
 
-#define CAN1RXID                0x101
+#define CAN1RXID                0x102
 #define RX1BJECT                1
 #define CAN1TXID                0x100
 #define TX1BJECT                25

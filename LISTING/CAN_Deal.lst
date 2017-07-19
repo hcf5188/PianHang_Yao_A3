@@ -47764,16 +47764,16 @@ N
 N#endif
 L 6 "..\inc_h\System_Init.h" 2
 N//级联限位
-N#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
-N#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-N#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
-N#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
+N//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+N//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+N//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
+N//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
 N
 N//板载限位
-N//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-N//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
-N//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
-N//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+N#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+N#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
+N#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
+N#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
 N
 N#define M1_Dir_Forward ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_PIN_4)
 N#define M1_Dir_Reverse ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, 0)
@@ -47843,36 +47843,36 @@ N
 L 5 "..\inc_h\AllDeal.h" 2
 N/******************      频率变化幅值         ******************/
 N
-N#define   MOTOR_ONE_LIMIT11    67  //腰部电机 1  软起动频率变化幅值
-N#define   MOTOR_ONE_LIMIT12    4   //腰部电机 1  软停止频率变化幅值
+N#define   MOTOR_ONE_LIMIT11    100  //腰部电机 1  软起动频率变化幅值
+N#define   MOTOR_ONE_LIMIT12    300   //腰部电机 1  软停止频率变化幅值
 N
-N#define   MOTOR_ONE_LIMIT21    470  //偏航电机   软起动频率变化幅值
-N#define   MOTOR_ONE_LIMIT22    20   //偏航电机   软停止频率变化幅值
+N#define   MOTOR_ONE_LIMIT21    40  //偏航电机   软起动频率变化幅值
+N#define   MOTOR_ONE_LIMIT22    30   //偏航电机   软停止频率变化幅值
 N
 N/******************     软启停相关宏    ************************/
 N
-N#define FRE_MIN_LIMIT1   400
-N#define FRE_MAX_LIMIT1   5000
+N#define FRE_MIN_LIMIT1   5000
+N#define FRE_MAX_LIMIT1   30000
 N
-N#define FRE_MIN_LIMIT2   400
-N#define FRE_MAX_LIMIT2   5000
+N#define FRE_MIN_LIMIT2   1250
+N#define FRE_MAX_LIMIT2   7500
 N
 N#define temp_stop1   45    //软停止最后步数的系数
 N#define temp_stop2   110    //软停止最后步数的系数
 N
-N#define   SOFT_FRE_START_MIN1    400   //电机1软启动的起始频率
-N#define   SOFT_FRE_START_NUM1    60   //软启动频率变化的次数
-N#define   SOFT_FRE_START_TIME1   5     //软启动频率更替时间(ms)
-N#define   SOFT_FRE_STOP_MIN1     400    //电机1软停止的最后频率
-N#define   SOFT_FRE_STOP_NUM1     60   //软停止频率变化的次数
-N#define   SOFT_FRE_STOP_TIME1    5     //软停止频率更替时间(ms)
+N#define   SOFT_FRE_START_MIN1    2000   //电机1软启动的起始频率
+N#define   SOFT_FRE_START_NUM1    300   //软启动频率变化的次数
+N#define   SOFT_FRE_START_TIME1   1     //软启动频率更替时间(ms)
+N#define   SOFT_FRE_STOP_MIN1     1000    //电机1软停止的最后频率
+N#define   SOFT_FRE_STOP_NUM1     300   //软停止频率变化的次数
+N#define   SOFT_FRE_STOP_TIME1    1     //软停止频率更替时间(ms)
 N
-N#define   SOFT_FRE_START_MIN2    400   //电机2软启动的起始频率
-N#define   SOFT_FRE_START_NUM2    60   //软启动频率变化的次数
-N#define   SOFT_FRE_START_TIME2   5     //软启动频率更替时间(ms)
-N#define   SOFT_FRE_STOP_MIN2     400   //电机2软停止的最后频率
-N#define   SOFT_FRE_STOP_NUM2     60   //软停止频率变化的次数
-N#define   SOFT_FRE_STOP_TIME2    5     //软停止频率更替时间(ms)
+N#define   SOFT_FRE_START_MIN2    1000   //电机2软启动的起始频率
+N#define   SOFT_FRE_START_NUM2    300   //软启动频率变化的次数
+N#define   SOFT_FRE_START_TIME2   1     //软启动频率更替时间(ms)
+N#define   SOFT_FRE_STOP_MIN2     1000   //电机2软停止的最后频率
+N#define   SOFT_FRE_STOP_NUM2     300   //软停止频率变化的次数
+N#define   SOFT_FRE_STOP_TIME2    1     //软停止频率更替时间(ms)
 N
 N#define  STEP_INDEX_NUM1  1000
 N#define  STEP_INDEX_NUM2  1000
@@ -47894,8 +47894,8 @@ N
 N
 L 2 "..\DEAL\CAN_Deal.c" 2
 N 
-N#define MOTOR1     0x10    //控制电机 1 的指令
-N#define MOTOR2     0x20	   //控制电机 2 的指令
+N#define MOTOR1     0x90    //控制电机 1 的指令 腰部电机
+N#define MOTOR2     0x30	   //控制电机 2 的指令 偏航电机
 N#define INTERFACE  0x00    //胸部接口板
 N
 Nextern CanFifo can1RxFifo;
@@ -47916,9 +47916,9 @@ X		return 0;
 N	switch(can1RxDatas[0])
 N	{
 N		case MOTOR1:DataToMotor1();break;//电机1的数据包
-X		case 0x10:DataToMotor1();break;
+X		case 0x90:DataToMotor1();break;
 N		case MOTOR2:DataToMotor2();break;//电机2的数据包
-X		case 0x20:DataToMotor2();break;
+X		case 0x30:DataToMotor2();break;
 N		case INTERFACE:	InterFaceDeal();break;	//升级、调试等指令。
 X		case 0x00:	InterFaceDeal();break;	
 N		default:	break;
@@ -47955,7 +47955,7 @@ N			can1RxDatas[1] = 0xF3;break;
 N		default:break;
 N	}		
 N	can1RxDatas[0] = MOTOR1 + 1;
-X	can1RxDatas[0] = 0x10 + 1;
+X	can1RxDatas[0] = 0x90 + 1;
 N	can1RxDatas[2] = Step_Num_Cur1.byte[1];//返回当前所走步数
 N	can1RxDatas[3] = Step_Num_Cur1.byte[0];//
 N	can1RxDatas[4] = M1_state.byte;		   //返回当前限位状态	
@@ -47991,7 +47991,7 @@ N			can1RxDatas[1] = 0xF3;break;
 N		default:break;
 N	}		
 N	can1RxDatas[0] = MOTOR2 + 1;
-X	can1RxDatas[0] = 0x20 + 1;
+X	can1RxDatas[0] = 0x30 + 1;
 N	can1RxDatas[2] = Step_Num_Cur2.byte[1];//返回当前所走步数
 N	can1RxDatas[3] = Step_Num_Cur2.byte[0];//
 N	can1RxDatas[4] = M2_state.byte;	       //返回当前限位状态

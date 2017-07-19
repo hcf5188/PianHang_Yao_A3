@@ -47764,16 +47764,16 @@ N
 N#endif
 L 6 "..\inc_h\System_Init.h" 2
 N//级联限位
-N#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
-N#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-N#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
-N#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
+N//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+N//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+N//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_2) & GPIO_PIN_2)
+N//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_1) & GPIO_PIN_1)
 N
 N//板载限位
-N//#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
-N//#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
-N//#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
-N//#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
+N#define M1_Read_S1    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_3) & GPIO_PIN_3)
+N#define M1_Read_S2    (ROM_GPIOPinRead(GPIO_PORTA_BASE,GPIO_PIN_4) & GPIO_PIN_4)
+N#define M2_Read_S1    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_6) & GPIO_PIN_6)
+N#define M2_Read_S2    (ROM_GPIOPinRead(GPIO_PORTC_BASE,GPIO_PIN_7) & GPIO_PIN_7)
 N
 N#define M1_Dir_Forward ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, GPIO_PIN_4)
 N#define M1_Dir_Reverse ROM_GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4, 0)
@@ -47843,36 +47843,36 @@ N
 L 5 "..\inc_h\AllDeal.h" 2
 N/******************      频率变化幅值         ******************/
 N
-N#define   MOTOR_ONE_LIMIT11    67  //腰部电机 1  软起动频率变化幅值
-N#define   MOTOR_ONE_LIMIT12    4   //腰部电机 1  软停止频率变化幅值
+N#define   MOTOR_ONE_LIMIT11    100  //腰部电机 1  软起动频率变化幅值
+N#define   MOTOR_ONE_LIMIT12    300   //腰部电机 1  软停止频率变化幅值
 N
-N#define   MOTOR_ONE_LIMIT21    470  //偏航电机   软起动频率变化幅值
-N#define   MOTOR_ONE_LIMIT22    20   //偏航电机   软停止频率变化幅值
+N#define   MOTOR_ONE_LIMIT21    40  //偏航电机   软起动频率变化幅值
+N#define   MOTOR_ONE_LIMIT22    30   //偏航电机   软停止频率变化幅值
 N
 N/******************     软启停相关宏    ************************/
 N
-N#define FRE_MIN_LIMIT1   400
-N#define FRE_MAX_LIMIT1   5000
+N#define FRE_MIN_LIMIT1   5000
+N#define FRE_MAX_LIMIT1   30000
 N
-N#define FRE_MIN_LIMIT2   400
-N#define FRE_MAX_LIMIT2   5000
+N#define FRE_MIN_LIMIT2   1250
+N#define FRE_MAX_LIMIT2   7500
 N
 N#define temp_stop1   45    //软停止最后步数的系数
 N#define temp_stop2   110    //软停止最后步数的系数
 N
-N#define   SOFT_FRE_START_MIN1    400   //电机1软启动的起始频率
-N#define   SOFT_FRE_START_NUM1    60   //软启动频率变化的次数
-N#define   SOFT_FRE_START_TIME1   5     //软启动频率更替时间(ms)
-N#define   SOFT_FRE_STOP_MIN1     400    //电机1软停止的最后频率
-N#define   SOFT_FRE_STOP_NUM1     60   //软停止频率变化的次数
-N#define   SOFT_FRE_STOP_TIME1    5     //软停止频率更替时间(ms)
+N#define   SOFT_FRE_START_MIN1    2000   //电机1软启动的起始频率
+N#define   SOFT_FRE_START_NUM1    300   //软启动频率变化的次数
+N#define   SOFT_FRE_START_TIME1   1     //软启动频率更替时间(ms)
+N#define   SOFT_FRE_STOP_MIN1     1000    //电机1软停止的最后频率
+N#define   SOFT_FRE_STOP_NUM1     300   //软停止频率变化的次数
+N#define   SOFT_FRE_STOP_TIME1    1     //软停止频率更替时间(ms)
 N
-N#define   SOFT_FRE_START_MIN2    400   //电机2软启动的起始频率
-N#define   SOFT_FRE_START_NUM2    60   //软启动频率变化的次数
-N#define   SOFT_FRE_START_TIME2   5     //软启动频率更替时间(ms)
-N#define   SOFT_FRE_STOP_MIN2     400   //电机2软停止的最后频率
-N#define   SOFT_FRE_STOP_NUM2     60   //软停止频率变化的次数
-N#define   SOFT_FRE_STOP_TIME2    5     //软停止频率更替时间(ms)
+N#define   SOFT_FRE_START_MIN2    1000   //电机2软启动的起始频率
+N#define   SOFT_FRE_START_NUM2    300   //软启动频率变化的次数
+N#define   SOFT_FRE_START_TIME2   1     //软启动频率更替时间(ms)
+N#define   SOFT_FRE_STOP_MIN2     1000   //电机2软停止的最后频率
+N#define   SOFT_FRE_STOP_NUM2     300   //软停止频率变化的次数
+N#define   SOFT_FRE_STOP_TIME2    1     //软停止频率更替时间(ms)
 N
 N#define  STEP_INDEX_NUM1  1000
 N#define  STEP_INDEX_NUM2  1000
@@ -47931,24 +47931,24 @@ N
 N	M_ss_cnt1          = 0; //Timer2频率反转计数初始化
 N	Step_Num_Cur1.word = 0; //当前已走步数
 N	motor_ss1          = SOFT_FRE_START_MIN1; //软启动 初始频率赋值
-X	motor_ss1          = 400; 
+X	motor_ss1          = 2000; 
 N	//软启动频率变化幅值
 N	Fre_Fuzhi11 = MOTOR_ONE_LIMIT11;//(Given_Fre1.word - SOFT_FRE_START_MIN1)/SOFT_FRE_START_NUM1; //都设置为固定值试试，效果应该非常好
-X	Fre_Fuzhi11 = 67;
+X	Fre_Fuzhi11 = 100;
 N	//软停止频率变化幅值
 N	Fre_Fuzhi12 = MOTOR_ONE_LIMIT12;//(Given_Fre1.word - SOFT_FRE_STOP_MIN1)/SOFT_FRE_STOP_NUM1;//设置为固定值试一下
-X	Fre_Fuzhi12 = 4;
+X	Fre_Fuzhi12 = 300;
 N	//软停止步数索引
 N	Stop_index1 =3; //(Given_Fre1.word - FRE_MIN_LIMIT1)/STEP_INDEX_NUM1;
 N	
 N	if(Motor_Direction1 == 1)//方向
 X	if(Flagbits . fg6 == 1)
-N		M1_Dir_Forward;				 
-X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40006000, 0x00000010, 0x00000010);				 
+N		M1_Dir_Reverse;
+X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40006000, 0x00000010, 0);
 N	else if(Motor_Direction1 == 0)//方向控制
 X	else if(Flagbits . fg6 == 0)
-N		M1_Dir_Reverse;			
-X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40006000, 0x00000010, 0);			
+N		M1_Dir_Forward;				
+X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40006000, 0x00000010, 0x00000010);				
 N}
 Nvoid STEP_Start2(void)
 N{
@@ -47971,25 +47971,25 @@ N
 N	M_ss_cnt2          = 0; //Timer2频率反转计数初始化
 N	Step_Num_Cur2.word = 0; //当前已走步数
 N	motor_ss2          = SOFT_FRE_START_MIN2; //软启动 初始频率赋值
-X	motor_ss2          = 400; 
+X	motor_ss2          = 1000; 
 N
 N	//软启动频率变化幅值
 N	Fre_Fuzhi21 = MOTOR_ONE_LIMIT21;//(Given_Fre2.word - SOFT_FRE_START_MIN2)/SOFT_FRE_START_NUM2; 
-X	Fre_Fuzhi21 = 470;
+X	Fre_Fuzhi21 = 40;
 N	//软停止频率变化幅值
 N	Fre_Fuzhi22 = MOTOR_ONE_LIMIT22;//(Given_Fre2.word - SOFT_FRE_STOP_MIN2)/SOFT_FRE_STOP_NUM2; 
-X	Fre_Fuzhi22 = 20;
+X	Fre_Fuzhi22 = 30;
 N	//软停止步数索引
 N	Stop_index2 = 1;
 N	
 N	if(Motor_Direction2 == 1)//方向		
 X	if(Flagbits . fg7 == 1)
-N		M2_Dir_Forward;
-X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40007000, 0x00000004, 0);
-N	else if(Motor_Direction2 == 0)
-X	else if(Flagbits . fg7 == 0)
 N		M2_Dir_Reverse;
 X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40007000, 0x00000004, 0x00000004);
+N	else if(Motor_Direction2 == 0)
+X	else if(Flagbits . fg7 == 0)
+N		M2_Dir_Forward;
+X		((void (*)(uint32_t ui32Port, uint8_t ui8Pins, uint8_t ui8Val))((uint32_t *)(((uint32_t *)0x01000010)[4]))[0])(0x40007000, 0x00000004, 0);
 N}
 N/************************************************
 N* 函 数 名 : void SOFT_Start_M1(void)
@@ -48011,11 +48011,11 @@ X		Flagbits . fg13 = 0;
 N		Timer0AStart(motor_ss1);	//重置定时器	
 N		//软启动整个阶段都可以匹配相应的软停止
 N		if(motor_ss1 < FRE_MIN_LIMIT1)
-X		if(motor_ss1 < 400)
+X		if(motor_ss1 < 5000)
 N			Stop_index1 = 1;
 N		else
 N			Stop_index1 = (motor_ss1/temp_stop1)*(SOFT_FRE_STOP_TIME1);
-X			Stop_index1 = (motor_ss1/45)*(5);
+X			Stop_index1 = (motor_ss1/45)*(1);
 N	}//软停止阶段
 N	if((M_SS_Fre_stop1 == 0)&&(Step_Num_Cur1.word > (Given_Step1.word - Stop_index1)))
 X	if((Flagbits . fg15 == 0)&&(Step_Num_Cur1.word > (Given_Step1.word - Stop_index1)))
@@ -48025,7 +48025,7 @@ X		Flagbits . fg14= 0;
 N		M_SS_Fre_stop1 = 1;              //软停止标志置位
 X		Flagbits . fg15 = 1;              
 N		M_ss_cnt1 = SOFT_FRE_STOP_NUM1;  //软停止的频率变化次数
-X		M_ss_cnt1 = 60;  
+X		M_ss_cnt1 = 300;  
 N	}//步数走完
 N	if(Step_Num_Cur1.word >= Given_Step1.word)
 N		Motor1_Stop();
@@ -48033,24 +48033,12 @@ N	if(Motor_Direction1 == 1)
 X	if(Flagbits . fg6 == 1)
 N	{
 N		if(M1_state.Limit1)
-N		{
 N			Motor1_Stop();
-N			Motor_New_Cmd1   = 1;
-X			Flagbits . fg8   = 1;
-N			Motor_Direction1 = 0;
-X			Flagbits . fg6 = 0;
-N		}
 N	}
 N	else
 N	{
 N		if(M1_state.Limit2)
-N		{
 N			Motor1_Stop();
-N			Motor_New_Cmd1   = 1;
-X			Flagbits . fg8   = 1;
-N			Motor_Direction1 = 1;
-X			Flagbits . fg6 = 1;
-N		}
 N	}
 N}
 Nvoid SOFT_Start_M2(void)
@@ -48066,11 +48054,11 @@ X		Flagbits . fg16 = 0;
 N		Timer1AStart(motor_ss2);
 N		//软启动在哪个频率，相应的软停止步数也跟着变
 N		if(motor_ss2 < FRE_MIN_LIMIT2)
-X		if(motor_ss2 < 400)
+X		if(motor_ss2 < 1250)
 N			Stop_index2 = 0;
 N		else
 N			Stop_index2 = (motor_ss2/temp_stop2)*(SOFT_FRE_STOP_TIME2);
-X			Stop_index2 = (motor_ss2/110)*(5);
+X			Stop_index2 = (motor_ss2/110)*(1);
 N	}//软停止阶段
 N	if((M_SS_Fre_stop2 == 0)&&(Step_Num_Cur2.word > (Given_Step2.word - Stop_index2)))
 X	if((Flagbits . fg18 == 0)&&(Step_Num_Cur2.word > (Given_Step2.word - Stop_index2)))
@@ -48080,7 +48068,7 @@ X		Flagbits . fg17= 0;
 N		M_SS_Fre_stop2 = 1;   //软停止标志置位
 X		Flagbits . fg18 = 1;   
 N		M_ss_cnt2 = SOFT_FRE_STOP_NUM2;  //软停止的频率变化次数
-X		M_ss_cnt2 = 60;  
+X		M_ss_cnt2 = 300;  
 N	}//步数走完
 N	if(Step_Num_Cur2.word >= Given_Step2.word) 
 N		Motor2_Stop();
@@ -48089,26 +48077,12 @@ N	if(Motor_Direction2 == 1) //判断电机运行方向
 X	if(Flagbits . fg7 == 1) 
 N	{
 N		if(M2_state.Limit1)     //判断是否压到运行方向上的限位
-N		{
 N			Motor2_Stop();
-N			
-N			Motor_New_Cmd2   = 1;
-X			Flagbits . fg9   = 1;
-N			Motor_Direction2 = 0;
-X			Flagbits . fg7 = 0;
-N		}
 N	}
 N	else                      //判断电机运行方向
 N	{
 N		if(M2_state.Limit2)     //判断是否压到运行方向上的限位
-N		{
 N			Motor2_Stop();
-N			
-N			Motor_New_Cmd2   = 1;
-X			Flagbits . fg9   = 1;
-N			Motor_Direction2 = 1;
-X			Flagbits . fg7 = 1;
-N		}
 N	}
 N}
 Nstatic void Motor1_Stop(void )
